@@ -1,0 +1,7 @@
+(library
+  (name cube)
+  (modules cube)
+  (libraries 
+    core
+    base)
+  (preprocess (pps ppx_jane bisect_ppx)))

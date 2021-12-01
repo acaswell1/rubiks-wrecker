@@ -1,16 +1,26 @@
 
+module Turn = struct
+  type t = R | R2 | R'
+        | B | B2 | B'
+        | L | L2 | L'
+        | F | F2 | F'
+        | U | U2 | U'
+        | D | D2 | D'
+        [@@deriving compare, sexp]
+end
+
+module Facelet = struct
+  type t = R1 | R2 | R3 | R4 | R5 | R6 | R7 | R8 | R9
+          | B1 | B2 | B3 | B4 | B5 | B6 | B7 | B8 | B9
+          | L1 | L2 | L3 | L4 | L5 | L6 | L7 | L8 | L9
+          | F1 | F2 | F3 | F4 | F5 | F6 | F7 | F8 | F9
+          | U1 | U2 | U3 | U4 | U5 | U6 | U7 | U8 | U9
+          | D1 | D2 | D3 | D4 | D5 | D6 | D7 | D8 | D9
+          [@@deriving equal, compare, sexp]
+end
+
 
 module Cube (R: Randomness) : Cube_interface = struct
-
-  module Turn = struct
-    type t = R | R' | R2
-          | B | B' | B2
-          | L | L' | L2
-          | F | F' | F2
-          | U | U' | U2
-          | D | D' | D2
-          [@@deriving compare, sexp]
-  end
 
   type turn = Turn.t
 
@@ -18,27 +28,19 @@ module Cube (R: Randomness) : Cube_interface = struct
 
   module Turn_map : (Map.S with type Key.t = turn) = Map.Make(Turn)
 
-  let all_turns = [R; R'; R2;
-                  B; B'; B2;
-                  L; L'; L2;
-                  F; F'; F2;
-                  U; U'; U2;
-                  D; D'; D2]
-
-  module Facelet = struct
-    type t = R1 | R2 | R3 | R4 | R5 | R6 | R7 | R8 | R9
-            | B1 | B2 | B3 | B4 | B5 | B6 | B7 | B8 | B9
-            | L1 | L2 | L3 | L4 | L5 | L6 | L7 | L8 | L9
-            | F1 | F2 | F3 | F4 | F5 | F6 | F7 | F8 | F9
-            | U1 | U2 | U3 | U4 | U5 | U6 | U7 | U8 | U9
-            | D1 | D2 | D3 | D4 | D5 | D6 | D7 | D8 | D9
-            [@@deriving compare, sexp]
-  end
+  let all_turns = [R; R2; R';
+                  B; B2; B';
+                  L; L2; L';
+                  F; F2; F';
+                  U; U2; U';
+                  D; D2; D']
 
   type facelet = Facelet.t
 
   (* This will override Turn.t *)
   include Facelet
+
+  type color = Bl | Or | Gr | Re | Wh | Ye [@@deriving equal]
 
   module Cube_map : (Map.S with type Key.t = facelet) = Map.Make(Facelet)
 
@@ -55,10 +57,8 @@ module Cube (R: Randomness) : Cube_interface = struct
                       U1; U2; U3; U4; U5; U6; U7; U8; U9;
                       D1; D2; D3; D4; D5; D6; D7; D8; D9]
 
-  type color = Bl | Or | Gr | Re | Wh | Ye [@@deriving equal]
-
   let colors = [Bl; Or; Gr; Re; Wh; Ye] (* Colors corresponding to each face of cube RBLFUD *)
-  let center_facelets [R5; B5; L5; F5; U5; D5] (* Center facelets for each face RBLFUD *)
+  let center_facelets = [R5; B5; L5; F5; U5; D5] (* Center facelets for each face RBLFUD *)
 
   (* Create a blank cube with only the middle colors filled *)
   let create () : t =
@@ -68,7 +68,7 @@ module Cube (R: Randomness) : Cube_interface = struct
     in
     center_facelets
     |> List.zip_exn colors (* Create tuples of (center facelet, Some color) *)
-    |> List.fold ~init:cube ~f:(fun accum (c, flet) -> Cube_map.set ~key:flet ~data:(Some c)) (* Fill in middle colors *)
+    |> List.fold ~init:cube ~f:(fun accum (c, flet) -> Cube_map.set accum ~key:flet ~data:(Some c)) (* Fill in middle colors *)
 
   
   let create_solved () : t =
@@ -102,7 +102,8 @@ module Cube (R: Randomness) : Cube_interface = struct
     | None -> None
 
   let set (cube: t) ~(facelet:facelet) ~(color: color option) : (t, string) result =
-    if facelet in center_facelets then Error "Tried to change center facelet. Center facelets are fixed "
+    if List.exists center_facelets ~f:(Facelet.equal facelet) then
+      Error "Tried to change center facelet. Center facelets are fixed "
     else OK (Cube_map.set cube ~key:facelet ~data:color)
 
   (* This is a map of the turn to the new configuration.
@@ -150,15 +151,30 @@ module Cube (R: Randomness) : Cube_interface = struct
                                   U1; U2; U3; U4; U5; U6; U7; U8; U9;
                                   D7; D4; D1; D8; D5; D2; D9; D6; D3]
 
+  (* Each move is a repetition of a single clockwise move.
+      e.g. R2 is R twice and R' is R three times.
+      Fill in a map of the equivalences.*)
+  let turn_equivalence_map : (turn * int) Turn_map.t = 
+    let get_clockwise_index i = i - Int.rem i 3 in (* Round down to the nearest multiple of 3 to get the clockwise turn in all_turns*)
+    all_turns
+    |> List.mapi ~f:(fun i turn -> (turn, (List.nth_exn all_turns @@ get_clockwise_index i, i % 3 + 1) ) )
+    |> Turn_map.of_alist_exn
+
+
   let move (cube: t) (turn: turn) : t =
-    let new_facelets = match Turn_map.find turn_results turn with
-      | Some ls -> ls
-      | _ -> failwith "Turn not found!"
+    let (turn, multiple) = match Turn_map.find turn_equivalence_map turn with
+      | Some x -> x
+      | None -> failwith "Turn not found!"
     in
-    new_facelets
-    |> List.map ~f:(fun key -> get cube ~facelet:key) (* Get the colors that will fill in *)
-    |> List.zip_exn all_facelets (* Zip colors with the facelet that they will replace *)
-    |> Cube_map.of_alist_exn (* Populate the cube with these new facelet*color values*)
+    let make_move t c =
+      t
+      |> Turn_map.find turn_results (* Find the resulting list of facelets from the turn *)
+      |> Option.value_exn (* Illegal turns are caught above, so this is safe *)
+      |> List.map ~f:(fun facelet -> get c ~facelet:facelet) (* Get the colors that will fill in *)
+      |> List.zip_exn all_facelets (* Zip colors with the facelet that they will replace *)
+      |> Cube_map.of_alist_exn (* Populate the cube with these new facelet,color values *)
+    in
+    Fn.apply_n_times ~n:multiple (make_move turn) cube (* apply the turn multiple times*)
 
 
   let scramble () : t =
