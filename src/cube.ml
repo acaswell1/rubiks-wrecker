@@ -1,12 +1,11 @@
 open Core;;
 open Turn;;
 open Facelet;;
+open Color;;
 
 type turn = Turn.t
-
 type facelet = Facelet.t
-
-type color = Bl | Or | Gr | Re | Wh | Ye [@@deriving equal]
+type color = Color.t
 
 module Cube_map : (Map.S with type Key.t = facelet) = Map.Make(Facelet)
 
@@ -41,7 +40,7 @@ let create_solved () : t =
       in a different location. This requires solving it. I may do this later. *)
 let is_well_formed (cube: t) : bool =
   let cube_limited_to_color c = 
-    Cube_map.filter cube ~f:(equal_option equal_color c)
+    Cube_map.filter cube ~f:(equal_option Color.equal c)
   in
   colors
   |> List.for_all ~f:(fun c -> Some c |> cube_limited_to_color |> Cube_map.length |> equal_int 9)
@@ -53,7 +52,7 @@ let from_list (ls: (Facelet.t * color option) list) : t option =
   | _ -> None
 
 let equal_cube (c1: t) (c2: t) : bool =
-  Cube_map.equal (equal_option equal_color) c1 c2
+  Cube_map.equal (equal_option Color.equal) c1 c2
 
 (* The middle colors can never change, so rotations/symmetry are ignored.
   Therefore, a cube is solved iff it is exactly equal to create_solved () *)

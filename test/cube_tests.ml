@@ -2,7 +2,10 @@ open Core;;
 open OUnit2;;
 open Turn;;
 open Facelet;;
+open Color;;
 open Cube;;
+
+type color = Color.t
 
 let c = create_solved ();;
 
