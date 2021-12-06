@@ -136,7 +136,7 @@ let move (cube: t) (turn: turn) : t =
     | Some x -> x
     | None -> failwith "Turn not found!"
   in
-  let make_move t c =
+  let make_move (t: turn) (c: t) =
     t
     |> Turn_map.find turn_results (* Find the resulting list of facelets from the turn *)
     |> Option.value_exn (* Illegal turns are caught above, so this is safe *)
