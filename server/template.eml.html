@@ -3,6 +3,74 @@ let render _ =
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <style>
+      .top-of-page{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 50px;
+        background-color: skyblue;
+        width: max-content;
+        height: min-content;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 5px;
+      }
+      .background{
+        background-color: lightslategray;
+      }
+      .solve-selector{
+        display: grid;
+        grid-template-columns: auto auto auto;
+        padding: 20px;
+        justify-content: space-evenly;
+      }
+      .choice{
+        width: 100px;
+        height: 50px;
+        background-color: skyblue;
+        border-radius: 25px;
+        text-align: center;
+        vertical-align: center;
+        margin: auto;
+        padding: 10px;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+        cursor: pointer;
+      }
+      .choice:hover {
+      background-color: #008CBA;
+      color: white;
+      }
+      .color-selector{
+        display: grid;
+        grid-template-columns: auto auto auto auto auto auto;
+        background-color: skyblue;;
+        justify-content: space-evenly;
+        border-radius: 25px;
+        height: 100px;
+        align-content: center;
+      }
+      .selector{
+        width: 70px;
+        height: 70px;
+        cursor: pointer;
+      }
+      .red-selector{
+        background-color: red;
+      }
+      .blue-selector{
+        background-color: blue;
+      }
+      .yellow-selector{
+        background-color: yellow;
+      }
+      .green-selector{
+        background-color: green;
+      }
+      .white-selector{
+        background-color: white;
+      }
+      .orange-selector{
+        background-color: orange;
+      }
       .outer-grid {
         display: grid;
         grid-template-columns: 270px 270px 270px 270px;
@@ -21,9 +89,8 @@ let render _ =
         height: 50px;
         width: 50px;
       }
-
-      .grid-item:f5{
-        background-color: red;
+      .grid-item:hover{
+        background-color: azure;
       }
       .F5 {
         background-color: red;
@@ -79,80 +146,28 @@ let render _ =
         height: 50px;
         width: 50px;
       }
-      .solve-selector{
-        display: grid;
-        grid-template-columns: auto auto auto auto;
-        padding: 50px;
-      }
-      .color-selector{
-        display: grid;
-        grid-template-columns: auto auto auto auto auto auto;
-        padding: 50px;
-        background-color: black;
-        margin-bottom: auto;
-      }
-
-      .selector{
-        width: 50px;
-        height: 50px;
-        cursor: pointer;
-      }
-      .red-selector{
-        background-color: red;
-      }
-      .blue-selector{
-        background-color: blue;
-      }
-      .yellow-selector{
-        background-color: yellow;
-      }
-      .green-selector{
-        background-color: green;
-      }
-      .white-selector{
-        background-color: white;
-      }
-      .orange-selector{
-        background-color: orange;
-      }
-      .top-of-page{
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: x-large;
+      #solution{
         text-align: center;
-      }
-      .background{
-        background-color: lightslategray;
-      }
-      .choice{
-        width: 100px;
-        height: 50px;
-        background-color: skyblue;
-        border-radius: 25px;
-        text-align: center;
-        vertical-align: center;
-        margin: auto;
-        padding: 10px;
-        font-weight: bold;
-        font-family: Arial, Helvetica, sans-serif;
-        cursor: pointer;
-      }
-      .choice:hover {
-      background-color: #008CBA;
-      color: white;
-      }
-      .selector:hover{
-        border: 1px solid rgba(0, 0, 0, 0.8);
-      }
-      .selector:focus{
-        border: 5px solid rgba(0, 0, 0, 0.8);
+        text-justify: auto;
       }
       </style>
       </head>
 
   <body class="background">
-    <h1 class="top-of-page">Solve the Rubik's Cube</h1>
+    <h1 class="top-of-page">The Rubik's Wrecker</h1>
+    <div class= "solve-selector">
+      <button onClick="window.location.reload()" class="choice">Reset</button>
+      <button class="choice">Randomize</button>
+      <button onClick="displaySolution();" class="choice">Solve</button>
+      <script>
+        function displaySolution() {
+          document.getElementById('solution').innerText = "Soultion Goes Here";
+        }
+      </script>
+    </div>
+    <p id="solution"></p>
     <div id="color_select" class ="color-selector">
-      <button onclick="myFunction('red')" class="selector red-selector" onclick=""> </button>
+      <button onclick="myFunction('red')" class="selector red-selector"> </button>
       <button onclick="myFunction('blue')" class="selector blue-selector"></button>
       <button onclick="myFunction('yellow')" class="selector yellow-selector"></button>
       <button onclick="myFunction('green')" class="selector green-selector"></button>
@@ -249,16 +264,5 @@ let render _ =
         }
       </script>
     </div>
-    <div class= "solve-selector">
-      <button onClick="window.location.reload()" class="choice">Reset</button>
-      <button class="choice">Randomize</button>
-      <button onClick="displaySolution();" class="choice">Solve</button>
-      <script>
-        function displaySolution() {
-          document.getElementById('solution').innerText = "Soultion Goes Here";
-        }
-      </script>
-    </div>
-    <p id="solution"></p>
   </body>
   </html>
