@@ -53,6 +53,25 @@ let test_move_invariant _ =
   assert_equal true @@ is_solved (move_seq c [U; U']);
 ;;
 
+let eq ls turn = 
+  assert_equal true @@ equal_cube (move c turn) (move_seq c ls)
+
+let test_move_equivalences _ =
+  eq [R; R; R] R';
+  eq [R; R] R2;
+  eq [L; L; L] L';
+  eq [L; L] L2;
+  eq [U; U; U] U';
+  eq [U; U] U2;
+  eq [F; F; F] F';
+  eq [F; F] F2;
+  eq [D; D; D] D';
+  eq [D; D] D2;
+  eq [B; B; B] B';
+  eq [B; B] B2;
+;;
+
+(* Returns if the given colors equal the cube configuration after the moves *)
 let move_seq_template (moves: Turn.t list) (colors: color list) : bool =
   let c1 = Cube.from_list (
     colors
@@ -60,15 +79,35 @@ let move_seq_template (moves: Turn.t list) (colors: color list) : bool =
     |> List.zip_exn all_facelets
   ) in
   equal_cube (Option.value_exn c1) (move_seq c moves)
+;;
 
-(* Not yet added to test list *)
+(* I'll just create some "random" sequences and input the colors I see on my cube *)
 let test_move_sequences _ =
-  assert_equal true @@ move_seq_template [] [];
+  assert_equal true @@ move_seq_template [R] [Bl; Bl; Bl; Bl; Bl; Bl; Bl; Bl; Bl;
+                                              Wh; Or; Or; Wh; Or; Or; Wh; Or; Or;
+                                              Gr; Gr; Gr; Gr; Gr; Gr; Gr; Gr; Gr;
+                                              Re; Re; Ye; Re; Re; Ye; Re; Re; Ye;
+                                              Wh; Wh; Re; Wh; Wh; Re; Wh; Wh; Re;
+                                              Ye; Ye; Or; Ye; Ye; Or; Ye; Ye; Or;];
+  assert_equal true @@ move_seq_template [R; U; L'; F'; D2; B; R2; U] [Wh; Wh; Gr; Gr; Bl; Ye; Gr; Or; Or;
+                                                                      Wh; Gr; Re; Re; Or; Gr; Ye; Wh; Re;
+                                                                      Bl; Ye; Ye; Wh; Gr; Re; Bl; Bl; Bl;
+                                                                      Gr; Gr; Re; Bl; Re; Ye; Wh; Or; Ye;
+                                                                      Wh; Re; Or; Bl; Wh; Bl; Or; Or; Gr;
+                                                                      Or; Ye; Re; Or; Ye; Wh; Ye; Re; Bl];
+  assert_equal true @@ move_seq_template [U; F; L'; U2; B2; D2; U; R; U'; L'; U; R'] [Wh; Or; Or; Wh; Bl; Re; Ye; Gr; Gr;
+                                                                                      Bl; Gr; Wh; Wh; Or; Wh; Ye; Re; Re;
+                                                                                      Re; Gr; Gr; Or; Gr; Bl; Gr; Bl; Wh;
+                                                                                      Ye; Ye; Gr; Ye; Re; Bl; Or; Re; Bl;
+                                                                                      Bl; Ye; Ye; Wh; Wh; Ye; Re; Re; Or;
+                                                                                      Bl; Gr; Re; Or; Ye; Or; Wh; Bl; Or];
 ;;
 
 let move_tests =
   "Move tests" >: test_list [
     "Move invariants" >:: test_move_invariant;
+    "Move equivalences" >:: test_move_equivalences;
+    "Move sequences" >:: test_move_sequences;
   ]
 ;;
 
