@@ -11,9 +11,6 @@ module Cube_map : (Map.S with type Key.t = facelet) = Map.Make(Facelet)
 
 type t = (color option) Cube_map.t
 
-let colors = [Bl; Or; Gr; Re; Wh; Ye] (* Colors corresponding to each face of cube RBLFUD *)
-let center_facelets = [R5; B5; L5; F5; U5; D5] (* Center facelets for each face RBLFUD *)
-
 (* Create a blank cube with only the middle colors filled *)
 let create () : t =
   let cube = all_facelets

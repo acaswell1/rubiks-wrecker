@@ -23,15 +23,6 @@
   (preprocess (pps ppx_jane bisect_ppx)))
 
 (library
-  (name cubie)
-  (modules cubie)
-  (libraries 
-    core
-    base
-    color)
-  (preprocess (pps ppx_jane bisect_ppx)))
-
-(library
   (name cube)
   (modules cube)
   (libraries 
@@ -39,6 +30,17 @@
     base
     turn
     facelet
+    color)
+  (preprocess (pps ppx_jane bisect_ppx)))
+
+(library
+  (name solver)
+  (modules solver)
+  (libraries 
+    core
+    base
+    turn
+    facelet
     color
-    cubie)
+    cube)
   (preprocess (pps ppx_jane bisect_ppx)))
