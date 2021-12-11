@@ -23,6 +23,15 @@
   (preprocess (pps ppx_jane bisect_ppx)))
 
 (library
+  (name turn_stack)
+  (modules turn_stack)
+  (libraries 
+    core
+    base
+    turn)
+  (preprocess (pps ppx_jane bisect_ppx)))
+
+(library
   (name cube)
   (modules cube)
   (libraries 
@@ -42,5 +51,6 @@
     turn
     facelet
     color
-    cube)
+    cube
+    turn_stack)
   (preprocess (pps ppx_jane bisect_ppx)))

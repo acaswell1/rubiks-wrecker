@@ -112,12 +112,12 @@ let turn_results : (facelet list) Turn_map.t =
                                 F1; F2; F3; F4; F5; F6; L7; L8; L9;
                                 U1; U2; U3; U4; U5; U6; U7; U8; U9;
                                 D7; D4; D1; D8; D5; D2; D9; D6; D3]
-  |> Turn_map.set ~key:Y ~data:[F1; F2; F3; F4; F5; F6; F7; F8; F9;
-                                R1; R2; R3; R4; R5; R6; R7; R8; R9;
-                                B1; B2; B3; B4; B5; B6; B7; B8; B9;
+  |> Turn_map.set ~key:Y ~data:[B1; B2; B3; B4; B5; B6; B7; B8; B9;
                                 L1; L2; L3; L4; L5; L6; L7; L8; L9;
-                                U3; U6; U9; U2; U5; U8; U1; U4; U7;
-                                D7; D4; D1; D8; D5; D2; D9; D6; D3]
+                                F1; F2; F3; F4; F5; F6; F7; F8; F9;
+                                R1; R2; R3; R4; R5; R6; R7; R8; R9;
+                                U7; U4; U1; U8; U5; U2; U9; U6; U3;
+                                D3; D6; D9; D2; D5; D8; D1; D4; D7]
 
 (* Each move is a repetition of a single clockwise move.
     e.g. R2 is R twice and R' is R three times.

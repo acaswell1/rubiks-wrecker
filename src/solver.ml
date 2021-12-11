@@ -2,65 +2,14 @@ open Core
 open Turn
 open Facelet
 open Color
-open Cube;;
+open Cube
+open Turn_stack
+open Turn_stack.Let_syntax
 
 type turn = Turn.t
 type facelet = Facelet.t
 type color = Color.t
 
-(* Taken from Assignment5 and adapted to work for turns *)
-module Turn_stack = struct
-  module T = struct
-    type turnstack = turn list (* this is our "heap type" *)
-
-    type 'a t = turnstack -> 'a * turnstack
-
-    let bind (x : 'a t) ~(f : 'a -> 'b t) : 'b t =
-     fun (s : turnstack) ->
-      let x', s' = x s in
-      (f x') s'
-
-    let return (x : 'a) : 'a t = fun (s : turnstack) -> (x, s)
-
-    let map = `Define_using_bind
-
-    (* Run puts us in c's monad-land with an empty stack
-       Unlike with state monad above just throw away final stack here
-    *)
-    let run (c : 'a t) : 'a = match c [] with a, _ -> a
-
-    (* pop should "push" the turn onto the turnstack and return () as the value *)
-    let push (t : turn) : unit t = fun (s : turnstack) -> ((), t :: s)
-
-    let push_many (t : turnstack) : unit t =
-      fun (s : turnstack) ->
-        ((), List.fold ~init:s ~f:(fun accum tn -> tn :: accum) t)
-
-    (* pop should pop off and return the top element, i.e. the list head.
-       Note for now if the charstack was empty you can just `failwith "empty pop"`.
-       Also get() above had a unit argument but it is not needed, the
-       state monad delays execution. *)
-    let pop : turn t =
-      fun (s : turnstack) ->
-        match s with
-        | t :: tl -> (t, tl)
-        | _ -> failwith "empty pop"
-
-    let is_empty : bool t = fun (s : turnstack) -> match s with [] -> (true, s) | _ -> (false, s)
-
-    (* The turns are added to the stack in the reverse order that they are performed, so 
-      use get_rev_stack to get the turns in the order they were performed. *)
-    let get_rev_stack : turnstack t =
-      fun (s : turnstack) -> (List.rev s, s)
-
-  end
-
-  include T
-  include Monad.Make (T)
-end
-
-open Turn_stack
-open Turn_stack.Let_syntax
   
 let monadic_move (tn: turn) (c: Cube.t) : Cube.t Turn_stack.t =
   let%bind () = push tn in
@@ -186,6 +135,13 @@ let put_corner_in_DFR (cube : Cube.t) (ye_flet: facelet) : Cube.t Turn_stack.t =
     | _ -> failwith "Not proper position for yellow corner"
   in monadic_move_seq (get_turn_seq ye_flet) cube
 
+(* Solves the yellow corners without affecting the edges on the bottom (i.e. doesn't mess up cross)
+  Method:
+  i) Locate desired corner 
+  ii) Put in bottom right corner
+  iii) Rotate bottom face "left" so that next color can fit it bottom right
+  iv) Repeat
+*)
 let solve_yellow_corners (cube : Cube.t) : Cube.t Turn_stack.t =
   List.fold [(Re, Bl); (Bl, Or); (Or, Gr); (Gr, Re)] ~init:(return cube) ~f:(fun cube (c1, c2) ->
     let%bind c = cube in
@@ -194,36 +150,128 @@ let solve_yellow_corners (cube : Cube.t) : Cube.t Turn_stack.t =
     |> List.hd_exn (* Gets only element--safe if the cube is well-formed *)
     |> Tuple3.get1 (* Get yellow facelet *)
     |> put_corner_in_DFR c
-    >>= monadic_move Y' (* Turn whole cube "left" i.e. clockwise around axis through top and bottom faces *)
+    >>= monadic_move D' (* Rotate bottom face so that next color can simply go in bottom right. Happens four times, so gets full rotation *)
     )
-  
+
+(* Puts the edge with the given facelet in the FR position such that the given 
+  facelet is on the front face. Does nothing if the facelet is not in the top position*)
+let put_edge_in_FR_from_top (cube : Cube.t) (flet: facelet) : Cube.t Turn_stack.t =
+  let rec get_turn_seq (f: facelet) =
+    match f with
+    | F2 -> [U; R; U'; R'; U'; F'; U; F]
+    | L2 -> U' :: get_turn_seq F2
+    | B2 -> U2 :: get_turn_seq F2
+    | R2 -> U :: get_turn_seq F2
+    | U6 -> [Y; U'; L'; U; L; U; F; U'; F'; Y'] (* Remember to "unrotate". This may get removed through final move simplification *)
+    | U8 -> U' :: get_turn_seq U6
+    | U4 -> U2 :: get_turn_seq U6
+    | U2 -> U :: get_turn_seq U6
+    | _ -> []
+  in monadic_move_seq (get_turn_seq flet) cube
+
+let has_non_white_edge_in_top (cube: Cube.t) : bool =
+  [(U8, F2); (U6, R2); (U2, B2); (U4, L2)] (* These are exactly the top edges. *)
+  |> List.filter ~f:(fun (f1, f2) -> not @@ is_color cube Wh f1 && not @@ is_color cube Wh f2) (* limit to edges with no white *)
+  |> List.is_empty
+  |> not
+
+(* Solves the edges in the middle layer of the cube so that first two layers are solved if the
+    yellow face was already solved.
+  Method:
+  i) Consider each edge in the top layer that has no white
+  ii) Rotate cube to match with center color
+  iii) Rotate top layer accordingly
+  iv) Fit in FR
+  v) Repeat
+*)
+let rec solve_middle_edges_in_top (cube : Cube.t) : Cube.t Turn_stack.t =
+  List.fold [(Re, Bl); (Bl, Or); (Or, Gr); (Gr, Re)] ~init:(return cube) ~f:(fun cube (c1, c2) ->
+    let%bind c = cube in
+    adjacent_edges
+    |> List.filter ~f:(fun (f1, f2) -> is_color c c1 f1 && is_color c c2 f2) (* limit to edge with desired two colors *)
+    |> List.hd_exn (* Gets only element--safe if the cube is well-formed *)
+    |> Tuple2.get1 (* Get the facelet of the first color because the second color is implied *)
+    |> put_edge_in_FR_from_top c
+    >>= monadic_move Y (* Rotate cube so that next color also needs to be put in FR *)
+    )
+    >>= fun c -> if has_non_white_edge_in_top c then solve_middle_edges_in_top c else return c (* Recurse until no white in top *)
+
+let rec reset_center (color: color option) (cube: Cube.t) : Cube.t Turn_stack.t =
+  if equal_option Color.equal color @@ get cube F5 then return cube (* Center is aligned. Nothing to do *)
+  else monadic_move Y cube >>= reset_center color (* Center not aligned. Rotate and check if that worked *)
+
+(* Puts the edge in the middle layer into FR s.t. flet is facing forward *)
+let put_middle_edge_in_FR (cube : Cube.t) (flet: facelet) : Cube.t Turn_stack.t =
+  let center_color = get cube F5 in
+  let move_to_top_seq = [R; U; R'; U'; F'; U'; F] in (* moves to top from FR *)
+  let turn_seq : turn list = (* This will either solve the piece or move into top layer *)
+    match flet with
+    | R4 -> [F2; U2; R'; F2; R; U2; F; U'; F] (* Correct position except piece is flipped *)
+    | R6 | B4 -> Y :: move_to_top_seq @ [Y'] (* Move back right into top *)
+    | B6 | L4 -> Y2 :: move_to_top_seq @ [Y2] (* Move back left into top *)
+    | L6 | F4 -> Y' :: move_to_top_seq @ [Y] (* Move front left into top *)
+    | F6 -> [] (* Is solved *)
+    | _ -> failwith "Unexpected position for edge. Expected in middle layer."
+  in
+  monadic_move_seq turn_seq cube
+  >>= reset_center (Some Re) (* Rotate to get the red facing forward so solving from top layer works properly *)
+  >>= solve_middle_edges_in_top (* May need to solve a piece from the top layer, so do that now *)
+  >>= reset_center center_color (* Rotate until center is lined up again we moved out of position *)
+
+(* Assuming there are no non-white edges in the top layer, solve the middle edges.
+  That is, all edges that need to be in the middle are already in the middle, and they
+  just need to be moved around (or they are solved).
+  Method:
+  i) Locate each edge that is NOT solved
+  ii) Move that edge into the top layer 
+  iii) Solve the middle edges that are in the top.
+  iv) Repeat.
+  Note that I can't just move edges out of the middle and then solve the top because of the way edges get replaced.
+  In fact, even though this seems like a long method, moving edges from top layer into middle layer first gets a lot
+  of edges into the top layer and typically solves the middle layer altogether. I need this step in case we're unlucky
+  and there are some flipped pieces. *)
+let solve_middle_edges_in_side (cube : Cube.t) : Cube.t Turn_stack.t =
+  List.fold [(Re, Bl); (Bl, Or); (Or, Gr); (Gr, Re)] ~init:(return cube) ~f:(fun cube (c1, c2) ->
+    let%bind c = cube in
+    adjacent_edges
+    |> List.filter ~f:(fun (f1, f2) -> is_color c c1 f1 && is_color c c2 f2) (* limit to edge with desired two colors *)
+    |> List.hd_exn (* Gets only element--safe if the cube is well-formed *)
+    |> Tuple2.get1 (* Get the facelet of the first color because it is solved iff the facelet is F6 *)
+    |> put_middle_edge_in_FR c
+    >>= monadic_move Y (* Rotate cube so that next edge can be put in FR *)
+    )
+
 let parse (t1, t2 : turn * turn) : turn list =
   (* Yes, long and messy as usual in this program *)
   match t1, t2 with
-  | R, R' | B, B' | L, L' | F, F' | U, U' | D, D'
-  | R', R | B', B | L', L | F', F | U', U | D', D
-  | R2, R2 | B2, B2 | L2, L2 | F2, F2 | U2, U2 | D2, D2 -> []
+  | R, R' | B, B' | L, L' | F, F' | U, U' | D, D' | Y, Y'
+  | R', R | B', B | L', L | F', F | U', U | D', D | Y', Y
+  | R2, R2 | B2, B2 | L2, L2 | F2, F2 | U2, U2 | D2, D2 | Y2, Y2 -> []
   | R, R2 | R2, R -> [R']
   | B, B2 | B2, B -> [B']
   | L, L2 | L2, L -> [L']
   | F, F2 | F2, F -> [F']
   | U, U2 | U2, U -> [U']
   | D, D2 | D2, D -> [D']
+  | Y, Y2 | Y2, Y -> [Y']
   | R', R2 | R2, R' -> [R] (* Cannot convert to string and do this more algorithmically because of issues with ' character *)
   | B', B2 | B2, B' -> [B]
   | L', L2 | L2, L' -> [L]
   | F', F2 | F2, F' -> [F]
   | U', U2 | U2, U' -> [U]
   | D', D2 | D2, D' -> [D]
+  | Y', Y2 | Y2, Y' -> [Y]
   | R, R | R', R' -> [R2]
   | B, B | B', B' -> [B2]
   | L, L | L', L' -> [L2]
   | F, F | F', F' -> [F2]
   | U, U | U', U' -> [U2]
   | D, D | D', D' -> [D2]
+  | Y, Y | Y', Y' -> [Y2]
   | _ -> [t1; t2] (* catch the remaining cases by just putting back on stack*)
 
-(* Simplify the turn list by replacing pairs/triples of moves with identical moves. *)
+(* Simplify the turn list by replacing series of moves with identical moves.
+  e.g. R R2 <=> R' *)
 let rec simplify (ls : turn list) : turn list =
   let res = List.fold ls ~init:[] ~f:(fun stack next ->
     match stack with
@@ -239,14 +287,15 @@ let monadic_main (cube : Cube.t) : (turn list) Turn_stack.t =
     cube
     |> solve_yellow_cross
     >>= solve_yellow_corners
+    >>= solve_middle_edges_in_top
+    >>= solve_middle_edges_in_side
   in
   let%bind s = get_rev_stack in
-  return @@ simplify s
+  return @@ simplify s (* At this point I really don't need the monad *)
 
-
-  (* let () =
-    scramble ()
-    |> monadic_main
-    |> run
-    |> List.to_string ~f:Turn.to_string
-    |> print_endline *)
+let solve (cube: Cube.t) : (turn list, string) result =
+  try
+    Ok (run @@ monadic_main cube)
+  with _ -> (* Ignore exception and assume it's from non-well-formedness because my tests never throw and error when cube is well-formed *)
+    Error "Cube is not well-formed. It could not be solved. "
+;;
