@@ -1,3 +1,5 @@
+(* This type has some conflicts with the turns because <face>2 is a turn.
+    Context will make sure this is not a problem, and I specify types as much as possible. *)
 type t = R1 | R2 | R3 | R4 | R5 | R6 | R7 | R8 | R9
           | B1 | B2 | B3 | B4 | B5 | B6 | B7 | B8 | B9
           | L1 | L2 | L3 | L4 | L5 | L6 | L7 | L8 | L9

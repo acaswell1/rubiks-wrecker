@@ -112,6 +112,12 @@ let turn_results : (facelet list) Turn_map.t =
                                 F1; F2; F3; F4; F5; F6; L7; L8; L9;
                                 U1; U2; U3; U4; U5; U6; U7; U8; U9;
                                 D7; D4; D1; D8; D5; D2; D9; D6; D3]
+  |> Turn_map.set ~key:Y ~data:[F1; F2; F3; F4; F5; F6; F7; F8; F9;
+                                R1; R2; R3; R4; R5; R6; R7; R8; R9;
+                                B1; B2; B3; B4; B5; B6; B7; B8; B9;
+                                L1; L2; L3; L4; L5; L6; L7; L8; L9;
+                                U3; U6; U9; U2; U5; U8; U1; U4; U7;
+                                D7; D4; D1; D8; D5; D2; D9; D6; D3]
 
 (* Each move is a repetition of a single clockwise move.
     e.g. R2 is R twice and R' is R three times.
@@ -146,7 +152,7 @@ let move_seq (cube: t) (ls: turn list) : t =
   List.fold ls ~init:cube ~f:move
 
 let scramble () : t =
-  let n = List.length all_turns in
+  let n = 18 in (* Only consider the first 18 turns because I don't want the rotation used in the scramble *)
   20 (* Need at least 19 moves to scramble based on some source I found. Use 20. *)
   |> List.init ~f:(fun _ -> List.nth_exn all_turns (Random.int n)) (* Create list of random turns *)
   |> List.fold ~init:(create_solved ()) ~f:move
