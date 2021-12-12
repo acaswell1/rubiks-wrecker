@@ -158,11 +158,20 @@ let render param =
     <div class= "solve-selector">
       <button onClick="window.location.reload()" class="choice">Reset</button>
       <button onClick="revealRandom();" class="choice">Randomize</button>
-      <button onClick="displaySolution();" class="choice">Solve</button>
+      <button id="Solve" onClick="displaySolution();" class="choice">Solve</button>
       <script>
         function displaySolution() {
           document.getElementById('solution').innerText = "Soultion Goes Here";
+          let facelets = document.getElementsByClassName('grid-item');
+          socket.send("Test");
         }
+
+        var socket = new WebSocket("ws://" + window.location.host + "/websocket"); 
+
+        socket.onmessage = function (e) {
+          alert(e.data);
+        };
+
         function randomRedirect() {
           window.location.href='/random';
         }

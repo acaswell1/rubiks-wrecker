@@ -1,9 +1,7 @@
 (executable
  (name server)
- (libraries dream
-    core
-    cube)
- )
+ (libraries dream core cube)
+ (preprocess (pps lwt_ppx)))
 
 (rule
  (targets template.ml)
