@@ -20,6 +20,10 @@ let c = scramble () in
     | x :: xs -> color_converter x c ^ color_list xs
     | [] -> ""
 
+let solve (color_string) = 
+  let _ = String.split_on_chars ~on:[','] color_string in 
+  color_string
+
 let () =
   Dream.run 
   @@ Dream.logger 
@@ -32,6 +36,7 @@ let () =
     match%lwt Dream.receive websocket with
     | Some "Hello?" -> let%lwt () = Dream.send websocket "Good-bye!" in Dream.close_websocket websocket
     | Some "Test" -> let%lwt () = Dream.send websocket "Pass" in Dream.close_websocket websocket
+    | Some x -> let%lwt () = Dream.send websocket x in Dream.close_websocket websocket
     | _ -> Dream.close_websocket websocket));
   ]
   @@ Dream.not_found

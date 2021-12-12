@@ -20,6 +20,20 @@ let c = scramble () in
     | x :: xs -> color_converter x c ^ color_list xs
     | [] -> ""
 
+let solve (color_string) = 
+  let _ = String.split_on_chars ~on:[','] color_string in 
+  color_string
+
+let solution_cube = create ()
+let rec set_facelets_to_color (list_facelets) (list_colors) =
+  match list_facelets, list_colors with
+  | x::xs, y::ys -> (x, (Some y)) :: set_facelets_to_color xs ys
+  | [], _::_ -> []
+  | x::xs, [] -> (x, None) :: set_facelets_to_color xs []
+  | [], [] -> []
+
+
+
 let () =
   Dream.run 
   @@ Dream.logger 
@@ -32,6 +46,7 @@ let () =
     match%lwt Dream.receive websocket with
     | Some "Hello?" -> let%lwt () = Dream.send websocket "Good-bye!" in Dream.close_websocket websocket
     | Some "Test" -> let%lwt () = Dream.send websocket "Pass" in Dream.close_websocket websocket
+    | Some x -> let%lwt () = Dream.send websocket x in Dream.close_websocket websocket
     | _ -> Dream.close_websocket websocket));
   ]
   @@ Dream.not_found
