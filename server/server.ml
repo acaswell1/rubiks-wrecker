@@ -33,7 +33,6 @@ let rec set_facelets_to_color (list_facelets) (list_colors) =
   | [], [] -> []
 
 
-
 let () =
   Dream.run 
   @@ Dream.logger 
@@ -44,7 +43,6 @@ let () =
   Dream.get "/websocket"
   (fun _ -> Dream.websocket (fun websocket ->
     match%lwt Dream.receive websocket with
-    | Some "Hello?" -> let%lwt () = Dream.send websocket "Good-bye!" in Dream.close_websocket websocket
     | Some "Test" -> let%lwt () = Dream.send websocket "Pass" in Dream.close_websocket websocket
     | Some x -> let%lwt () = Dream.send websocket x in Dream.close_websocket websocket
     | _ -> Dream.close_websocket websocket));

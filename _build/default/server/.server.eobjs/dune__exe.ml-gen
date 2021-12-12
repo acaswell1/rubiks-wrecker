@@ -1,6 +1,0 @@
-(** @canonical Dune__exe.Server *)
-module Server = Dune__exe__Server
-
-
-(** @canonical Dune__exe.Template *)
-module Template = Dune__exe__Template

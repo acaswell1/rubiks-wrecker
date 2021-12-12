@@ -7,7 +7,7 @@ val is_solved : t -> bool
 val is_well_formed : t -> bool
 val equal_cube : t -> t -> bool
 val get : t -> Facelet.t -> Color.t option
-val set : t -> Facelet.t -> color:(Color.t option) -> (t, string) result
+val set : t -> Facelet.t -> Color.t option -> (t, string) result
 val move : t -> Turn.t -> t
 val move_seq : t -> Turn.t list -> t
 val scramble : unit -> t

@@ -1,5 +1,10 @@
 type t = Bl | Or | Gr | Re | Wh | Ye [@@deriving equal, compare, sexp]
 
+<<<<<<< HEAD
+=======
+let colors = [Bl; Or; Gr; Re; Wh; Ye] (* Colors corresponding to each face of cube RBLFUD *)
+
+>>>>>>> f86dca735dce7b022a6705eab7357622c16c7b7c
 let to_string (color: t) : string =
   match color with
   | Bl -> "blue"
