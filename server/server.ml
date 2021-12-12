@@ -1,11 +1,5 @@
 open Core;;
-(* open Turn;;
-open Facelet;;
-open Color;; *)
 open Cube;;
-
-(* let c = create_solved() ;; *)
-
 
 let color_converter (face : Facelet.t) (c : Cube.t): string = match Cube.get c face with
 | Some x -> let col = Color.to_string x in 
@@ -29,13 +23,8 @@ let c = scramble () in
 let () =
   Dream.run 
   @@ Dream.logger 
-  @@ Dream.router [
-    
+  @@ Dream.router [ 
   Dream.get "/" (fun _ -> color_list (face_list) |> Template.render |>
       Dream.html);
-
-  Dream.get "/random" (fun _ -> color_list (face_list) |> Template.render |>
-  Dream.html)
-
   ]
   @@ Dream.not_found

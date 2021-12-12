@@ -21,7 +21,12 @@ let ___eml_buffer = Buffer.create 4096 in
 #206 "server/template.eml.html"
                       String.sub param 234 6
 )));
-(Buffer.add_string ___eml_buffer " id=\"U4\" onclick=\"colorChange('U4')\" class=\"grid-item\"></div>\n      <div class=\"U5\"></div>\n      <div name=");
+(Buffer.add_string ___eml_buffer " id=\"U4\" onclick=\"colorChange('U4')\" class=\"grid-item\"></div>\n      <div name=");
+(Printf.bprintf ___eml_buffer "%s" (Dream.html_escape (
+#207 "server/template.eml.html"
+                      String.sub param 240 6
+)));
+(Buffer.add_string ___eml_buffer " class=\"U5\"></div>\n      <div name=");
 (Printf.bprintf ___eml_buffer "%s" (Dream.html_escape (
 #208 "server/template.eml.html"
                       String.sub param 246 6
@@ -61,7 +66,12 @@ let ___eml_buffer = Buffer.create 4096 in
 #221 "server/template.eml.html"
                       String.sub param 126 6
 )));
-(Buffer.add_string ___eml_buffer " id=\"L4\" onclick=\"colorChange('L4')\" class=\"grid-item\"></div>\n      <div class=\"L5\"></div>\n      <div name=");
+(Buffer.add_string ___eml_buffer " id=\"L4\" onclick=\"colorChange('L4')\" class=\"grid-item\"></div>\n      <div name=");
+(Printf.bprintf ___eml_buffer "%s" (Dream.html_escape (
+#222 "server/template.eml.html"
+                      String.sub param 132 6
+)));
+(Buffer.add_string ___eml_buffer " class=\"L5\"></div>\n      <div name=");
 (Printf.bprintf ___eml_buffer "%s" (Dream.html_escape (
 #223 "server/template.eml.html"
                       String.sub param 138 6
@@ -101,7 +111,12 @@ let ___eml_buffer = Buffer.create 4096 in
 #232 "server/template.eml.html"
                       String.sub param 180 6
 )));
-(Buffer.add_string ___eml_buffer " id=\"F4\" onclick=\"colorChange('F4')\"class=\"grid-item\"></div>\n      <div class=\"F5\"></div>\n      <div name=");
+(Buffer.add_string ___eml_buffer " id=\"F4\" onclick=\"colorChange('F4')\"class=\"grid-item\"></div>\n      <div name=");
+(Printf.bprintf ___eml_buffer "%s" (Dream.html_escape (
+#233 "server/template.eml.html"
+                      String.sub param 186 6
+)));
+(Buffer.add_string ___eml_buffer " class=\"F5\"></div>\n      <div name=");
 (Printf.bprintf ___eml_buffer "%s" (Dream.html_escape (
 #234 "server/template.eml.html"
                       String.sub param 192 6
@@ -141,7 +156,12 @@ let ___eml_buffer = Buffer.create 4096 in
 #243 "server/template.eml.html"
                       String.sub param 18 6
 )));
-(Buffer.add_string ___eml_buffer " id=\"R4\" onclick=\"colorChange(this.id)\" class=\"grid-item\"></div>\n      <div class=\"R5\"></div>\n      <div name=");
+(Buffer.add_string ___eml_buffer " id=\"R4\" onclick=\"colorChange(this.id)\" class=\"grid-item\"></div>\n      <div name=");
+(Printf.bprintf ___eml_buffer "%s" (Dream.html_escape (
+#244 "server/template.eml.html"
+                      String.sub param 24 6
+)));
+(Buffer.add_string ___eml_buffer " class=\"R5\"></div>\n      <div name=");
 (Printf.bprintf ___eml_buffer "%s" (Dream.html_escape (
 #245 "server/template.eml.html"
                       String.sub param 30 6
@@ -181,7 +201,12 @@ let ___eml_buffer = Buffer.create 4096 in
 #254 "server/template.eml.html"
                       String.sub param 72 6
 )));
-(Buffer.add_string ___eml_buffer " id=\"B4\" onclick=\"colorChange('B4')\"class=\"grid-item\"></div>\n      <div class=\"B5\"></div>\n      <div name=");
+(Buffer.add_string ___eml_buffer " id=\"B4\" onclick=\"colorChange('B4')\"class=\"grid-item\"></div>\n      <div name=");
+(Printf.bprintf ___eml_buffer "%s" (Dream.html_escape (
+#255 "server/template.eml.html"
+                      String.sub param 78 6
+)));
+(Buffer.add_string ___eml_buffer " class=\"B5\"></div>\n      <div name=");
 (Printf.bprintf ___eml_buffer "%s" (Dream.html_escape (
 #256 "server/template.eml.html"
                       String.sub param 84 6
@@ -221,25 +246,30 @@ let ___eml_buffer = Buffer.create 4096 in
 #267 "server/template.eml.html"
                       String.sub param 288 6
 )));
-(Buffer.add_string ___eml_buffer " id=\"D4\" onclick=\"colorChange('D4')\"class=\"grid-item\"></div>\n      <div class=\"D5\"></div>\n      <div name=");
+(Buffer.add_string ___eml_buffer " id=\"D4\" onclick=\"colorChange('D4')\"class=\"grid-item\"></div>\n      <div name=");
+(Printf.bprintf ___eml_buffer "%s" (Dream.html_escape (
+#268 "server/template.eml.html"
+                      String.sub param 294 6
+)));
+(Buffer.add_string ___eml_buffer " class=\"D5\"></div>\n      <div name=");
 (Printf.bprintf ___eml_buffer "%s" (Dream.html_escape (
 #269 "server/template.eml.html"
-                      String.sub param 294 6
+                      String.sub param 300 6
 )));
 (Buffer.add_string ___eml_buffer " id=\"D6\" onclick=\"colorChange('D6')\" class=\"grid-item\"></div>\n      <div name=");
 (Printf.bprintf ___eml_buffer "%s" (Dream.html_escape (
 #270 "server/template.eml.html"
-                      String.sub param 300 6
+                      String.sub param 306 6
 )));
 (Buffer.add_string ___eml_buffer " id=\"D7\" onclick=\"colorChange('D7')\" class=\"grid-item\"></div>\n      <div name=");
 (Printf.bprintf ___eml_buffer "%s" (Dream.html_escape (
 #271 "server/template.eml.html"
-                      String.sub param 306 6
+                      String.sub param 312 6
 )));
 (Buffer.add_string ___eml_buffer " id=\"D8\" onclick=\"colorChange('D8')\" class=\"grid-item\"></div>\n      <div name=");
 (Printf.bprintf ___eml_buffer "%s" (Dream.html_escape (
 #272 "server/template.eml.html"
-                      String.sub param 312 6
+                      String.sub param 318 6
 )));
 (Buffer.add_string ___eml_buffer " id=\"D9\" onclick=\"colorChange('D9')\"class=\"grid-item\"></div>\n    </div>\n    <div class=\"grid-container\">\n    </div>\n    <div class=\"grid-container\">\n    </div>\n    <script>\n      function colorChange(id) {\n        document.getElementById(id).style.backgroundColor = document.getElementById(\"color_select\").style.backgroundColor;\n      }\n    </script>\n  </div>\n</body>\n</html>");
 (Buffer.contents ___eml_buffer)
