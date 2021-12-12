@@ -17,8 +17,8 @@
       <h2>98.33%</h2>
     </div>
     <div id="navbar">
-      <span class="unvisited" style="bottom:41.23%"></span>
-      <span class="unvisited" style="bottom:26.75%"></span>
+      <span class="unvisited" style="bottom:41.74%"></span>
+      <span class="unvisited" style="bottom:27.39%"></span>
     </div>
     <div id="report">
       <div id="lines-layer">
@@ -250,7 +250,9 @@
 <a id="L225"></a><span > </span>
 <a id="L226"></a><span > </span>
 <a id="L227"></a><span > </span>
-<a id="L228"></a><span class="visited"> </span>
+<a id="L228"></a><span > </span>
+<a id="L229"></a><span > </span>
+<a id="L230"></a><span class="visited"> </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -483,6 +485,8 @@
 <a href="#L226">226</a>
 <a href="#L227">227</a>
 <a href="#L228">228</a>
+<a href="#L229">229</a>
+<a href="#L230">230</a>
 </pre>
 <pre><code class="ocaml">(* Here I have all of the big lists and maps with all of the constants.
 
@@ -511,43 +515,43 @@ module Turn_map : (Map.S with type Key.t = turn) = Map.Make(Turn)
     because R1 is the first element in all_facelets. *)
 let turn_results : (facelet list) Turn_map.t = 
   Turn_map.empty
-  |&gt; Turn_map.se<span data-count="10">t</span> ~key:R ~data:[R7; R4; R1; R8; R5; R2; R9; R6; R3;
+  |&gt; Turn_map.se<span data-count="15">t</span> ~key:R ~data:[R7; R4; R1; R8; R5; R2; R9; R6; R3;
                                 U9; B2; B3; U6; B5; B6; U3; B8; B9;
                                 L1; L2; L3; L4; L5; L6; L7; L8; L9;
                                 F1; F2; D3; F4; F5; D6; F7; F8; D9;
                                 U1; U2; F3; U4; U5; F6; U7; U8; F9;
                                 D1; D2; B7; D4; D5; B4; D7; D8; B1]
-  |&gt; Turn_map.se<span data-count="10">t</span> ~key:B ~data:[R1; R2; D9; R4; R5; D8; R7; R8; D7;
+  |&gt; Turn_map.se<span data-count="15">t</span> ~key:B ~data:[R1; R2; D9; R4; R5; D8; R7; R8; D7;
                                 B7; B4; B1; B8; B5; B2; B9; B6; B3;
                                 U3; L2; L3; U2; L5; L6; U1; L8; L9;
                                 F1; F2; F3; F4; F5; F6; F7; F8; F9;
                                 R3; R6; R9; U4; U5; U6; U7; U8; U9;
                                 D1; D2; D3; D4; D5; D6; L1; L4; L7]
-  |&gt; Turn_map.se<span data-count="10">t</span> ~key:L ~data:[R1; R2; R3; R4; R5; R6; R7; R8; R9;
+  |&gt; Turn_map.se<span data-count="15">t</span> ~key:L ~data:[R1; R2; R3; R4; R5; R6; R7; R8; R9;
                                 B1; B2; D7; B4; B5; D4; B7; B8; D1;
                                 L7; L4; L1; L8; L5; L2; L9; L6; L3;
                                 U1; F2; F3; U4; F5; F6; U7; F8; F9;
                                 B9; U2; U3; B6; U5; U6; B3; U8; U9;
                                 F1; D2; D3; F4; D5; D6; F7; D8; D9]
-  |&gt; Turn_map.se<span data-count="10">t</span> ~key:F ~data:[U7; R2; R3; U8; R5; R6; U9; R8; R9;
+  |&gt; Turn_map.se<span data-count="15">t</span> ~key:F ~data:[U7; R2; R3; U8; R5; R6; U9; R8; R9;
                                 B1; B2; B3; B4; B5; B6; B7; B8; B9;
                                 L1; L2; D1; L4; L5; D2; L7; L8; D3;
                                 F7; F4; F1; F8; F5; F2; F9; F6; F3;
                                 U1; U2; U3; U4; U5; U6; L9; L6; L3;
                                 R7; R4; R1; D4; D5; D6; D7; D8; D9]
-  |&gt; Turn_map.se<span data-count="10">t</span> ~key:U ~data:[B1; B2; B3; R4; R5; R6; R7; R8; R9;
+  |&gt; Turn_map.se<span data-count="15">t</span> ~key:U ~data:[B1; B2; B3; R4; R5; R6; R7; R8; R9;
                                 L1; L2; L3; B4; B5; B6; B7; B8; B9;
                                 F1; F2; F3; L4; L5; L6; L7; L8; L9;
                                 R1; R2; R3; F4; F5; F6; F7; F8; F9;
                                 U7; U4; U1; U8; U5; U2; U9; U6; U3;
                                 D1; D2; D3; D4; D5; D6; D7; D8; D9]
-  |&gt; Turn_map.se<span data-count="10">t</span> ~key:D ~data:[R1; R2; R3; R4; R5; R6; F7; F8; F9;
+  |&gt; Turn_map.se<span data-count="15">t</span> ~key:D ~data:[R1; R2; R3; R4; R5; R6; F7; F8; F9;
                                 B1; B2; B3; B4; B5; B6; R7; R8; R9;
                                 L1; L2; L3; L4; L5; L6; B7; B8; B9;
                                 F1; F2; F3; F4; F5; F6; L7; L8; L9;
                                 U1; U2; U3; U4; U5; U6; U7; U8; U9;
                                 D7; D4; D1; D8; D5; D2; D9; D6; D3]
-  |&gt; Turn_map.se<span data-count="10">t</span> ~key:Y ~data:[B1; B2; B3; B4; B5; B6; B7; B8; B9;
+  |&gt; Turn_map.se<span data-count="15">t</span> ~key:Y ~data:[B1; B2; B3; B4; B5; B6; B7; B8; B9;
                                 L1; L2; L3; L4; L5; L6; L7; L8; L9;
                                 F1; F2; F3; F4; F5; F6; F7; F8; F9;
                                 R1; R2; R3; R4; R5; R6; R7; R8; R9;
@@ -561,20 +565,20 @@ let turn_results : (facelet list) Turn_map.t =
     Fill in a map of the equivalences. *)
 let turn_equivalence_map : (turn * int) Turn_map.t = 
   let get_clockwise_turn i = 
-    <span data-count="210">i</span>
-    |&gt; Int.round_dow<span data-count="210">n</span> ~to_multiple_of:3 (* Round down to multiple of 3 to get the clockwise index in all_turns *)
+    <span data-count="315">i</span>
+    |&gt; Int.round_dow<span data-count="315">n</span> ~to_multiple_of:3 (* Round down to multiple of 3 to get the clockwise index in all_turns *)
     |&gt; List.nth_exn all_turns (* nth_exn is safe because we only rounded down, and the index originally came from all_turns *)
   in
   all_turns
-  |&gt; List.map<span data-count="10">i</span> ~f:(fun i turn -&gt; <span data-count="210">(</span>turn, (get_clockwise_tur<span data-count="210">n</span> i, i <span data-count="210">%</span> 3 + 1) ) )
-  |&gt; Turn_map.of_alist_ex<span data-count="10">n</span>
+  |&gt; List.map<span data-count="15">i</span> ~f:(fun i turn -&gt; <span data-count="315">(</span>turn, (get_clockwise_tur<span data-count="315">n</span> i, i <span data-count="315">%</span> 3 + 1) ) )
+  |&gt; Turn_map.of_alist_ex<span data-count="15">n</span>
 
 (* All ordered pairs of facelets that make an edge piece *)
 let adjacent_edges =
   [(U8, F2); (U6, R2); (U2, B2); (U4, L2);
     (F8, D2); (R8, D6); (B8, D8); (L8, D4);
     (F6, R4); (R6, B4); (B6, L4); (L6, F4)] (* These are all unordered pairs of edge pieces *)
-    |&gt; fun ls -&gt; <span data-count="10">l</span>s @ (List.ma<span data-count="10">p</span> ls ~f:Tuple2.swap<span data-count="10">)</span> (* Also include the pairs in the other order *)
+    |&gt; fun ls -&gt; <span data-count="15">l</span>s @ (List.ma<span data-count="15">p</span> ls ~f:Tuple2.swap<span data-count="15">)</span> (* Also include the pairs in the other order *)
 
 
 (* All ordered pairs of facelets that make a corner piece.
@@ -582,41 +586,41 @@ let adjacent_edges =
 let adjacent_corners =
   let l1 = [(U9, R1, F3); (U3, B1, R3); (U1, L1, B3); (U7, F1, L3);
             (D9, R9, B7); (D3, F9, R7); (D1, L9, F7); (D7, B9, L7)] in
-  let l2 = List.map l1 ~f:(fun (a, b, c) -&gt; <span data-count="80">b</span>, a, c) in
-  <span data-count="10">l</span>et l3 = List.map l1 ~f:(fun (a, b, c) -&gt; <span data-count="80">b</span>, c, a) in
-  <span data-count="10">l</span>et l4 = List.map l1 ~f:(fun (a, b, c) -&gt; <span data-count="80">a</span>, c, b) in
-  <span data-count="10">l</span>et l5 = List.map l1 ~f:(fun (a, b, c) -&gt; <span data-count="80">c</span>, a, b) in
-  <span data-count="10">l</span>et l6 = List.map l1 ~f:(fun (a, b, c) -&gt; <span data-count="80">c</span>, b, a) in
-  <span data-count="10">l</span>1 @ l2 @ l3 @ l4 @ l5 @ l6 (* These lists aren't that long, so this shouldn't be terribly slow *)
+  let l2 = List.map l1 ~f:(fun (a, b, c) -&gt; <span data-count="120">b</span>, a, c) in
+  <span data-count="15">l</span>et l3 = List.map l1 ~f:(fun (a, b, c) -&gt; <span data-count="120">b</span>, c, a) in
+  <span data-count="15">l</span>et l4 = List.map l1 ~f:(fun (a, b, c) -&gt; <span data-count="120">a</span>, c, b) in
+  <span data-count="15">l</span>et l5 = List.map l1 ~f:(fun (a, b, c) -&gt; <span data-count="120">c</span>, a, b) in
+  <span data-count="15">l</span>et l6 = List.map l1 ~f:(fun (a, b, c) -&gt; <span data-count="120">c</span>, b, a) in
+  <span data-count="15">l</span>1 @ l2 @ l3 @ l4 @ l5 @ l6 (* These lists aren't that long, so this shouldn't be terribly slow *)
 
 (* Gets the turn sequence that puts the given facelet into the 
   FD position with the given facelet facing DOWN. *)
 let get_turns_to_FD (flet: facelet) : turn list = 
-  <span data-count="200052">m</span>atch flet with
-  | <span data-count="1335">F</span>8 -&gt; [F'; D; R'; D']
-  | <span data-count="5121">F</span>6 -&gt; [D; R'; D']
-  | <span data-count="4305">F</span>4 -&gt; [D'; L; D]
-  | <span data-count="2070">F</span>2 -&gt; [F; D; R'; D']
-  | <span data-count="5550">R</span>4 -&gt; [F]
-  | <span data-count="1795">R</span>2 -&gt; [R'; F; R]
-  | <span data-count="1550">R</span>8 -&gt; [R; F]
-  | <span data-count="4416">R</span>6 -&gt; [R2; F; R2]
-  | <span data-count="5755">L</span>6 -&gt; [F']
-  | <span data-count="1765">L</span>2 -&gt; [L; F'; L']
-  | <span data-count="4610">L</span>4 -&gt; [L2; F'; L2]
-  | <span data-count="475">L</span>8 -&gt; [L'; F']
-  | <span data-count="1780">B</span>2 -&gt; [U; R'; F; R]
-  | <span data-count="4840">B</span>4 -&gt; [D; R; D']
-  | <span data-count="4611">B</span>6 -&gt; [D'; L'; D]
-  | <span data-count="440">B</span>8 -&gt; [B; D; R; D']
-  | <span data-count="9059">U</span>8 -&gt; [F2]
-  | <span data-count="5925">U</span>6 -&gt; [U; F2]
-  | <span data-count="7912">U</span>2 -&gt; [U2; F2]
-  | <span data-count="5440">U</span>4 -&gt; [U'; F2]
-  | <span data-count="104874">D</span>2 -&gt; []
-  | <span data-count="8417">D</span>6 -&gt; [R2; U; F2]
-  | <span data-count="5446">D</span>8 -&gt; [B2; U2; F2]
-  | <span data-count="2561">D</span>4 -&gt; [L2; U'; F2]
+  <span data-count="209160">m</span>atch flet with
+  | <span data-count="1696">F</span>8 -&gt; [F'; D; R'; D']
+  | <span data-count="5515">F</span>6 -&gt; [D; R'; D']
+  | <span data-count="4721">F</span>4 -&gt; [D'; L; D]
+  | <span data-count="2467">F</span>2 -&gt; [F; D; R'; D']
+  | <span data-count="6002">R</span>4 -&gt; [F]
+  | <span data-count="2173">R</span>2 -&gt; [R'; F; R]
+  | <span data-count="1856">R</span>8 -&gt; [R; F]
+  | <span data-count="4872">R</span>6 -&gt; [R2; F; R2]
+  | <span data-count="6215">L</span>6 -&gt; [F']
+  | <span data-count="2161">L</span>2 -&gt; [L; F'; L']
+  | <span data-count="5062">L</span>4 -&gt; [L2; F'; L2]
+  | <span data-count="570">L</span>8 -&gt; [L'; F']
+  | <span data-count="2187">B</span>2 -&gt; [U; R'; F; R]
+  | <span data-count="5254">B</span>4 -&gt; [D; R; D']
+  | <span data-count="5039">B</span>6 -&gt; [D'; L'; D]
+  | <span data-count="592">B</span>8 -&gt; [B; D; R; D']
+  | <span data-count="9519">U</span>8 -&gt; [F2]
+  | <span data-count="6405">U</span>6 -&gt; [U; F2]
+  | <span data-count="8431">U</span>2 -&gt; [U2; F2]
+  | <span data-count="5925">U</span>4 -&gt; [U'; F2]
+  | <span data-count="105378">D</span>2 -&gt; []
+  | <span data-count="8753">D</span>6 -&gt; [R2; U; F2]
+  | <span data-count="5690">D</span>8 -&gt; [B2; U2; F2]
+  | <span data-count="2677">D</span>4 -&gt; [L2; U'; F2]
   | <span data-count="0">_</span> -&gt; failwith "Not proper position for edge facelet"
 
 (* Gets the turn sequence that puts the given facelet into the DFR corner
@@ -624,32 +628,32 @@ let get_turns_to_FD (flet: facelet) : turn list =
   These are not confirmed to be the shortest solutions; they're just solutions I found.*)
 let get_turns_to_DFR (flet : facelet) : turn list =
   (* Create a recursive function inside this with a shorter name *)
-  <span data-count="160048">l</span>et rec g (flet : facelet) : turn list =
-    <span data-count="252350">m</span>atch flet with
-    | <span data-count="95022">D</span>3 -&gt; []
-    | <span data-count="2520">R</span>7 -&gt; [R; U; R'] @ <span data-count="2520">g</span> F1 (* Fine to use list append because such small lists *)
-    | <span data-count="2084">F</span>9 -&gt; [F'; U'; F] @ <span data-count="2084">g</span> R3
-    | <span data-count="24545">F</span>3 -&gt; [F'; U'; F]
-    | <span data-count="6193">R</span>3 -&gt; U :: <span data-count="6193">g</span> F3
-    | <span data-count="3709">B</span>3 -&gt; U2 :: <span data-count="3709">g</span> F3
-    | <span data-count="6601">L</span>3 -&gt; U' :: <span data-count="6601">g</span> F3
-    | <span data-count="40481">R</span>1 -&gt; [R; U; R']
-    | <span data-count="3865">B</span>1 -&gt; U :: <span data-count="3865">g</span> R1
-    | <span data-count="5016">L</span>1 -&gt; U2 :: <span data-count="5016">g</span> R1 
-    | <span data-count="22661">F</span>1 -&gt; U' :: <span data-count="22661">g</span> R1
-    | <span data-count="14789">U</span>9 -&gt; [R; U2; R'] @ <span data-count="14789">g</span> F1
-    | <span data-count="2857">U</span>3 -&gt; U :: <span data-count="2857">g</span> U9
-    | <span data-count="3206">U</span>1 -&gt; U2 :: <span data-count="3206">g</span> U9
-    | <span data-count="5078">U</span>7 -&gt; U' :: <span data-count="5078">g</span> U9
-    | <span data-count="3186">D</span>9 -&gt; [B; U; B'] @ <span data-count="3186">g</span> F3
-    | <span data-count="2869">B</span>7 -&gt; [B; U; B'] @ <span data-count="2869">g</span> R1
-    | <span data-count="1632">R</span>9 -&gt; [R'; U2; R] @ <span data-count="1632">g</span> L3
-    | <span data-count="444">F</span>7 -&gt; [F; U; F'] @ <span data-count="444">g</span> L1
-    | <span data-count="616">L</span>9 -&gt; [L'; U'; L] @ <span data-count="616">g</span> F3
-    | <span data-count="556">D</span>1 -&gt; [L'; U'; L] @ <span data-count="556">g</span> R1
-    | <span data-count="1084">B</span>9 -&gt; [B'; U'; B] @ <span data-count="1084">g</span> L3
-    | <span data-count="1176">L</span>7 -&gt; [L; U2; L'] @ <span data-count="1176">g</span> R1
-    | <span data-count="2160">D</span>7 -&gt; [B'; U'; B] @ <span data-count="2160">g</span> F1
+  <span data-count="169156">l</span>et rec g (flet : facelet) : turn list =
+    <span data-count="273917">m</span>atch flet with
+    | <span data-count="95644">D</span>3 -&gt; []
+    | <span data-count="2942">R</span>7 -&gt; [R; U; R'] @ <span data-count="2942">g</span> F1 (* Fine to use list append because such small lists *)
+    | <span data-count="2570">F</span>9 -&gt; [F'; U'; F] @ <span data-count="2570">g</span> R3
+    | <span data-count="27897">F</span>3 -&gt; [F'; U'; F]
+    | <span data-count="7173">R</span>3 -&gt; U :: <span data-count="7173">g</span> F3
+    | <span data-count="4193">B</span>3 -&gt; U2 :: <span data-count="4193">g</span> F3
+    | <span data-count="7581">L</span>3 -&gt; U' :: <span data-count="7581">g</span> F3
+    | <span data-count="45615">R</span>1 -&gt; [R; U; R']
+    | <span data-count="4327">B</span>1 -&gt; U :: <span data-count="4327">g</span> R1
+    | <span data-count="5589">L</span>1 -&gt; U2 :: <span data-count="5589">g</span> R1 
+    | <span data-count="25621">F</span>1 -&gt; U' :: <span data-count="25621">g</span> R1
+    | <span data-count="16649">U</span>9 -&gt; [R; U2; R'] @ <span data-count="16649">g</span> F1
+    | <span data-count="3339">U</span>3 -&gt; U :: <span data-count="3339">g</span> U9
+    | <span data-count="3657">U</span>1 -&gt; U2 :: <span data-count="3657">g</span> U9
+    | <span data-count="5518">U</span>7 -&gt; U' :: <span data-count="5518">g</span> U9
+    | <span data-count="3517">D</span>9 -&gt; [B; U; B'] @ <span data-count="3517">g</span> F3
+    | <span data-count="3208">B</span>7 -&gt; [B; U; B'] @ <span data-count="3208">g</span> R1
+    | <span data-count="1962">R</span>9 -&gt; [R'; U2; R] @ <span data-count="1962">g</span> L3
+    | <span data-count="535">F</span>7 -&gt; [F; U; F'] @ <span data-count="535">g</span> L1
+    | <span data-count="702">L</span>9 -&gt; [L'; U'; L] @ <span data-count="702">g</span> F3
+    | <span data-count="649">D</span>1 -&gt; [L'; U'; L] @ <span data-count="649">g</span> R1
+    | <span data-count="1263">B</span>9 -&gt; [B'; U'; B] @ <span data-count="1263">g</span> L3
+    | <span data-count="1380">L</span>7 -&gt; [L; U2; L'] @ <span data-count="1380">g</span> R1
+    | <span data-count="2386">D</span>7 -&gt; [B'; U'; B] @ <span data-count="2386">g</span> F1
     | <span data-count="0">_</span> -&gt; failwith "Not proper position for corner facelet"
   in g flet
 
@@ -657,17 +661,17 @@ let get_turns_to_DFR (flet : facelet) : turn list =
   facelet is on the front face. Does nothing if the facelet is not in the top position *)
 let get_turns_top_to_FR (flet: facelet) =
   (* Create a recursive function inside this with a shorter name *)
-  <span data-count="635924">l</span>et rec g (flet : facelet) : turn list =
-    <span data-count="681390">m</span>atch flet with
-    | <span data-count="30818">F</span>2 -&gt; [U; R; U'; R'; U'; F'; U; F]
-    | <span data-count="9827">L</span>2 -&gt; U' :: <span data-count="9827">g</span> F2
-    | <span data-count="5027">B</span>2 -&gt; U2 :: <span data-count="5027">g</span> F2
-    | <span data-count="10645">R</span>2 -&gt; U :: <span data-count="10645">g</span> F2
-    | <span data-count="26322">U</span>6 -&gt; [Y; U'; L'; U; L; U; F; U'; F'; Y'] (* Remember to "unrotate". This may get removed through final move simplification *)
-    | <span data-count="8082">U</span>8 -&gt; U' :: <span data-count="8082">g</span> U6
-    | <span data-count="6037">U</span>4 -&gt; U2 :: <span data-count="6037">g</span> U6
-    | <span data-count="5848">U</span>2 -&gt; U :: <span data-count="5848">g</span> U6
-    | <span data-count="578784">_</span> -&gt; []
+  <span data-count="686792">l</span>et rec g (flet : facelet) : turn list =
+    <span data-count="738181">m</span>atch flet with
+    | <span data-count="34756">F</span>2 -&gt; [U; R; U'; R'; U'; F'; U; F]
+    | <span data-count="10839">L</span>2 -&gt; U' :: <span data-count="10839">g</span> F2
+    | <span data-count="5879">B</span>2 -&gt; U2 :: <span data-count="5879">g</span> F2
+    | <span data-count="11656">R</span>2 -&gt; U :: <span data-count="11656">g</span> F2
+    | <span data-count="30319">U</span>6 -&gt; [Y; U'; L'; U; L; U; F; U'; F'; Y'] (* Remember to "unrotate". This may get removed through final move simplification *)
+    | <span data-count="9246">U</span>8 -&gt; U' :: <span data-count="9246">g</span> U6
+    | <span data-count="6996">U</span>4 -&gt; U2 :: <span data-count="6996">g</span> U6
+    | <span data-count="6773">U</span>2 -&gt; U :: <span data-count="6773">g</span> U6
+    | <span data-count="621717">_</span> -&gt; []
   in g flet
 
 (* This is a list of white facelet permutations paired with the required OLL turn sequence.
@@ -695,11 +699,11 @@ let oll_perms =
   moves I allow.*)
 let pll_edge_algorithms =
   [
+    []; (* Also consider no solution necessary *)
     [R; U'; R; U; R; U; R; U'; R'; U'; R2];
     [R2; U; R; U; R'; U'; R'; U'; R'; U; R'];
-    (* [R2; L2; D; R2; L2; U2; R2; L2; D; R2; L2]; *) (* Not actually necessary *)
-    [R2; L2; D; R2; L2; U; R; L'; B2; R2; L2; F2; R; L'; U2];
-    [] (* Also consider no solution necessary *)
+    (* [R2; L2; D; R2; L2; U2; R2; L2; D; R2; L2]; *) (* Keeps solved state, so is "hidden" by no solution *)
+    [R2; L2; D; R2; L2; U; R; L'; B2; R2; L2; F2; R; L'; U2]
   ]
 
 (* This is the list of algorithms that solve the corners after the oll stage.
@@ -707,11 +711,13 @@ let pll_edge_algorithms =
   moves I allow.*)
 let pll_corner_algorithms =
   [
+    []; (* Also consider no solution necessary *)
     [R'; F; R'; B2; R; F'; R'; B2; R2];
     [R2; B2; R; F; R'; B2; R; F'; R];
     [R; B'; R'; F; R; B; R'; F'; R; B; R'; F; R; B'; R'; F'];
-    [] (* Also consider no solution necessary *)
-  <span data-count="20">]</span>
+    [R'; F; R'; B2; R; F'; R'; B2; R2; U'; R'; F; R'; B2; R; F'; R'; B2; R2];
+    [R2; B2; R; F; R'; B2; R; F'; R; U; R2; B2; R; F; R'; B2; R; F'; R]
+  <span data-count="30">]</span>
 </code></pre>
       </div>
     </div>

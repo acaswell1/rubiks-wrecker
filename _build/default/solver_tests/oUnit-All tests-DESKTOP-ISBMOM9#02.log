@@ -1,36 +1,36 @@
-2021-12-12T17:37:01+00:00 DESKTOP-ISBMOM9#02 I: Start test All tests:0:Steps tests:1:Yellow face.
-2021-12-12T17:37:11+00:00 DESKTOP-ISBMOM9#02 I: Test All tests:0:Steps tests:1:Yellow face is successful.
-2021-12-12T17:37:11+00:00 DESKTOP-ISBMOM9#02 I: End test All tests:0:Steps tests:1:Yellow face.
-2021-12-12T17:37:11+00:00 DESKTOP-ISBMOM9#02 I: Start test All tests:0:Steps tests:5:Full.
-2021-12-12T17:37:11+00:00 DESKTOP-ISBMOM9#02 I: Test All tests:0:Steps tests:5:Full is successful.
-2021-12-12T17:37:11+00:00 DESKTOP-ISBMOM9#02 I: End test All tests:0:Steps tests:5:Full.
-2021-12-12T17:37:11+00:00 DESKTOP-ISBMOM9#02 I: Start test All tests:1:Invariant tests:0:Yellow cross invariant.
-2021-12-12T17:37:11+00:00 DESKTOP-ISBMOM9#02 I: Test All tests:1:Invariant tests:0:Yellow cross invariant is successful.
-2021-12-12T17:37:11+00:00 DESKTOP-ISBMOM9#02 I: End test All tests:1:Invariant tests:0:Yellow cross invariant.
-2021-12-12T17:37:11+00:00 DESKTOP-ISBMOM9#02 I: Start test All tests:1:Invariant tests:1:Yellow face invariant.
-2021-12-12T17:37:11+00:00 DESKTOP-ISBMOM9#02 I: Test All tests:1:Invariant tests:1:Yellow face invariant is successful.
-2021-12-12T17:37:11+00:00 DESKTOP-ISBMOM9#02 I: End test All tests:1:Invariant tests:1:Yellow face invariant.
-2021-12-12T17:37:11+00:00 DESKTOP-ISBMOM9#02 I: Start test All tests:1:Invariant tests:2:Are top edges solved.
-2021-12-12T17:37:11+00:00 DESKTOP-ISBMOM9#02 I: Test All tests:1:Invariant tests:2:Are top edges solved is successful.
-2021-12-12T17:37:11+00:00 DESKTOP-ISBMOM9#02 I: End test All tests:1:Invariant tests:2:Are top edges solved.
-2021-12-12T17:37:11+00:00 DESKTOP-ISBMOM9#02 I: Start test All tests:1:Invariant tests:3:Is top solved.
-2021-12-12T17:37:11+00:00 DESKTOP-ISBMOM9#02 I: Test All tests:1:Invariant tests:3:Is top solved is successful.
-2021-12-12T17:37:11+00:00 DESKTOP-ISBMOM9#02 I: End test All tests:1:Invariant tests:3:Is top solved.
-2021-12-12T17:37:11+00:00 DESKTOP-ISBMOM9#02 I: Start test All tests:1:Invariant tests:4:Cube already solved.
-2021-12-12T17:37:11+00:00 DESKTOP-ISBMOM9#02 I: Test All tests:1:Invariant tests:4:Cube already solved is successful.
-2021-12-12T17:37:11+00:00 DESKTOP-ISBMOM9#02 I: End test All tests:1:Invariant tests:4:Cube already solved.
-2021-12-12T17:37:11+00:00 DESKTOP-ISBMOM9#02 I: Start test All tests:2:Simplify tests:0:Easy move equivalences.
-2021-12-12T17:37:11+00:00 DESKTOP-ISBMOM9#02 I: Test All tests:2:Simplify tests:0:Easy move equivalences is successful.
-2021-12-12T17:37:11+00:00 DESKTOP-ISBMOM9#02 I: End test All tests:2:Simplify tests:0:Easy move equivalences.
-2021-12-12T17:37:11+00:00 DESKTOP-ISBMOM9#02 I: Start test All tests:2:Simplify tests:1:Triple move equivalences.
-2021-12-12T17:37:11+00:00 DESKTOP-ISBMOM9#02 I: Test All tests:2:Simplify tests:1:Triple move equivalences is successful.
-2021-12-12T17:37:11+00:00 DESKTOP-ISBMOM9#02 I: End test All tests:2:Simplify tests:1:Triple move equivalences.
-2021-12-12T17:37:11+00:00 DESKTOP-ISBMOM9#02 I: Start test All tests:2:Simplify tests:2:Medium simplifications.
-2021-12-12T17:37:12+00:00 DESKTOP-ISBMOM9#02 I: Test All tests:2:Simplify tests:2:Medium simplifications is successful.
-2021-12-12T17:37:12+00:00 DESKTOP-ISBMOM9#02 I: End test All tests:2:Simplify tests:2:Medium simplifications.
-2021-12-12T17:37:12+00:00 DESKTOP-ISBMOM9#02 I: Start test All tests:2:Simplify tests:3:Hard simplifications.
-2021-12-12T17:37:12+00:00 DESKTOP-ISBMOM9#02 I: Test All tests:2:Simplify tests:3:Hard simplifications is successful.
-2021-12-12T17:37:12+00:00 DESKTOP-ISBMOM9#02 I: End test All tests:2:Simplify tests:3:Hard simplifications.
-2021-12-12T17:37:12+00:00 DESKTOP-ISBMOM9#02 I: Start test All tests:2:Simplify tests:4:Simplify preserves cube.
-2021-12-12T17:37:16+00:00 DESKTOP-ISBMOM9#02 I: Test All tests:2:Simplify tests:4:Simplify preserves cube is successful.
-2021-12-12T17:37:16+00:00 DESKTOP-ISBMOM9#02 I: End test All tests:2:Simplify tests:4:Simplify preserves cube.
+2021-12-12T18:32:41+00:00 DESKTOP-ISBMOM9#02 I: Start test All tests:0:Steps tests:1:Yellow face.
+2021-12-12T18:32:54+00:00 DESKTOP-ISBMOM9#02 I: Test All tests:0:Steps tests:1:Yellow face is successful.
+2021-12-12T18:32:54+00:00 DESKTOP-ISBMOM9#02 I: End test All tests:0:Steps tests:1:Yellow face.
+2021-12-12T18:32:54+00:00 DESKTOP-ISBMOM9#02 I: Start test All tests:0:Steps tests:5:Full.
+2021-12-12T18:32:54+00:00 DESKTOP-ISBMOM9#02 I: Test All tests:0:Steps tests:5:Full is successful.
+2021-12-12T18:32:54+00:00 DESKTOP-ISBMOM9#02 I: End test All tests:0:Steps tests:5:Full.
+2021-12-12T18:32:54+00:00 DESKTOP-ISBMOM9#02 I: Start test All tests:1:Invariant tests:0:Yellow cross invariant.
+2021-12-12T18:32:54+00:00 DESKTOP-ISBMOM9#02 I: Test All tests:1:Invariant tests:0:Yellow cross invariant is successful.
+2021-12-12T18:32:54+00:00 DESKTOP-ISBMOM9#02 I: End test All tests:1:Invariant tests:0:Yellow cross invariant.
+2021-12-12T18:32:54+00:00 DESKTOP-ISBMOM9#02 I: Start test All tests:1:Invariant tests:1:Yellow face invariant.
+2021-12-12T18:32:54+00:00 DESKTOP-ISBMOM9#02 I: Test All tests:1:Invariant tests:1:Yellow face invariant is successful.
+2021-12-12T18:32:54+00:00 DESKTOP-ISBMOM9#02 I: End test All tests:1:Invariant tests:1:Yellow face invariant.
+2021-12-12T18:32:54+00:00 DESKTOP-ISBMOM9#02 I: Start test All tests:1:Invariant tests:2:Are top edges solved.
+2021-12-12T18:32:54+00:00 DESKTOP-ISBMOM9#02 I: Test All tests:1:Invariant tests:2:Are top edges solved is successful.
+2021-12-12T18:32:54+00:00 DESKTOP-ISBMOM9#02 I: End test All tests:1:Invariant tests:2:Are top edges solved.
+2021-12-12T18:32:54+00:00 DESKTOP-ISBMOM9#02 I: Start test All tests:1:Invariant tests:3:Is top solved.
+2021-12-12T18:32:54+00:00 DESKTOP-ISBMOM9#02 I: Test All tests:1:Invariant tests:3:Is top solved is successful.
+2021-12-12T18:32:54+00:00 DESKTOP-ISBMOM9#02 I: End test All tests:1:Invariant tests:3:Is top solved.
+2021-12-12T18:32:54+00:00 DESKTOP-ISBMOM9#02 I: Start test All tests:1:Invariant tests:4:Cube already solved.
+2021-12-12T18:32:54+00:00 DESKTOP-ISBMOM9#02 I: Test All tests:1:Invariant tests:4:Cube already solved is successful.
+2021-12-12T18:32:54+00:00 DESKTOP-ISBMOM9#02 I: End test All tests:1:Invariant tests:4:Cube already solved.
+2021-12-12T18:32:54+00:00 DESKTOP-ISBMOM9#02 I: Start test All tests:2:Simplify tests:0:Easy move equivalences.
+2021-12-12T18:32:54+00:00 DESKTOP-ISBMOM9#02 I: Test All tests:2:Simplify tests:0:Easy move equivalences is successful.
+2021-12-12T18:32:54+00:00 DESKTOP-ISBMOM9#02 I: End test All tests:2:Simplify tests:0:Easy move equivalences.
+2021-12-12T18:32:55+00:00 DESKTOP-ISBMOM9#02 I: Start test All tests:2:Simplify tests:1:Triple move equivalences.
+2021-12-12T18:32:55+00:00 DESKTOP-ISBMOM9#02 I: Test All tests:2:Simplify tests:1:Triple move equivalences is successful.
+2021-12-12T18:32:55+00:00 DESKTOP-ISBMOM9#02 I: End test All tests:2:Simplify tests:1:Triple move equivalences.
+2021-12-12T18:32:55+00:00 DESKTOP-ISBMOM9#02 I: Start test All tests:2:Simplify tests:2:Medium simplifications.
+2021-12-12T18:32:55+00:00 DESKTOP-ISBMOM9#02 I: Test All tests:2:Simplify tests:2:Medium simplifications is successful.
+2021-12-12T18:32:55+00:00 DESKTOP-ISBMOM9#02 I: End test All tests:2:Simplify tests:2:Medium simplifications.
+2021-12-12T18:32:55+00:00 DESKTOP-ISBMOM9#02 I: Start test All tests:2:Simplify tests:3:Hard simplifications.
+2021-12-12T18:32:55+00:00 DESKTOP-ISBMOM9#02 I: Test All tests:2:Simplify tests:3:Hard simplifications is successful.
+2021-12-12T18:32:55+00:00 DESKTOP-ISBMOM9#02 I: End test All tests:2:Simplify tests:3:Hard simplifications.
+2021-12-12T18:32:55+00:00 DESKTOP-ISBMOM9#02 I: Start test All tests:2:Simplify tests:4:Simplify preserves cube.
+2021-12-12T18:32:59+00:00 DESKTOP-ISBMOM9#02 I: Test All tests:2:Simplify tests:4:Simplify preserves cube is successful.
+2021-12-12T18:32:59+00:00 DESKTOP-ISBMOM9#02 I: End test All tests:2:Simplify tests:4:Simplify preserves cube.

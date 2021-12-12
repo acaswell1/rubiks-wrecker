@@ -137,9 +137,9 @@ let test_are_top_edges_solved _ =
   assert_equal true (create_solved () |> Fn.flip move U |> are_top_edges_solved);
   assert_equal true (create_solved () |> Fn.flip move U2 |> are_top_edges_solved);
   assert_equal true (create_solved () |> Fn.flip move U' |> are_top_edges_solved);
-  let s = List.hd_exn Consts.pll_edge_algorithms in
+  let s = List.nth_exn Consts.pll_edge_algorithms 1 in
   assert_equal false (create_solved () |> Fn.flip move_seq s |> are_top_edges_solved);
-  let s = List.hd_exn Consts.pll_corner_algorithms in
+  let s = List.nth_exn Consts.pll_corner_algorithms 1 in
   assert_equal true (create_solved () |> Fn.flip move_seq s |> are_top_edges_solved);
 ;;
 
@@ -149,9 +149,9 @@ let test_is_top_layer_solved _ =
   assert_equal true (create_solved () |> Fn.flip move U2 |> is_top_layer_solved);
   assert_equal true (create_solved () |> Fn.flip move U' |> is_top_layer_solved);
   assert_equal false (create_solved () |> Fn.flip move F |> is_top_layer_solved);
-  let s = List.hd_exn Consts.pll_edge_algorithms in
+  let s = List.nth_exn Consts.pll_edge_algorithms 1 in
   assert_equal false (create_solved () |> Fn.flip move_seq s |> is_top_layer_solved);
-  let s = List.hd_exn Consts.pll_corner_algorithms in
+  let s = List.nth_exn Consts.pll_corner_algorithms 1 in
   assert_equal false (create_solved () |> Fn.flip move_seq s |> is_top_layer_solved);
 ;;
 

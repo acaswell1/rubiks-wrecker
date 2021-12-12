@@ -14,12 +14,11 @@
           <span class="dirname">src/</span>cube.ml
         </a>
       </h1>
-      <h2>94.44%</h2>
+      <h2>96.30%</h2>
     </div>
     <div id="navbar">
       <span class="unvisited" style="bottom:45.65%"></span>
       <span class="unvisited" style="bottom:31.52%"></span>
-      <span class="unvisited" style="bottom:20.65%"></span>
     </div>
     <div id="report">
       <div id="lines-layer">
@@ -96,7 +95,7 @@
 <a id="L70"></a><span > </span>
 <a id="L71"></a><span class="visited"> </span>
 <a id="L72"></a><span class="visited"> </span>
-<a id="L73"></a><span class="unvisited"> </span>
+<a id="L73"></a><span class="visited"> </span>
 <a id="L74"></a><span > </span>
 <a id="L75"></a><span > </span>
 <a id="L76"></a><span class="visited"> </span>
@@ -239,9 +238,9 @@ let create () : t =
 
 
 let create_solved () : t =
-  <span data-count="70053">L</span>ist.ini<span data-count="70053">t</span> 54 ~f:(fun i -&gt; <span data-count="3782862">L</span>ist.nth_exn colors @@ i / 9 ) (* Colors corresponding to all_facelets *)
-  |&gt; List.ma<span data-count="70053">p</span> ~f:Option.return
-  |&gt; List.zip_ex<span data-count="70053">n</span> all_facelets (* Create tuples (facelet, Some color) *)
+  <span data-count="72579">L</span>ist.ini<span data-count="72579">t</span> 54 ~f:(fun i -&gt; <span data-count="3919266">L</span>ist.nth_exn colors @@ i / 9 ) (* Colors corresponding to all_facelets *)
+  |&gt; List.ma<span data-count="72579">p</span> ~f:Option.return
+  |&gt; List.zip_ex<span data-count="72579">n</span> all_facelets (* Create tuples (facelet, Some color) *)
   |&gt; Cube_map.of_alist_exn
 
   (* For now, just ensure there are 9 of each color.
@@ -252,11 +251,11 @@ let create_solved () : t =
       A cube is only solvable if no pieces were removed and put back
       in a different location. This requires solving it. I may do this later. *)
 let is_well_formed (cube: t) : bool =
-  <span data-count="7">l</span>et cube_limited_to_color c = 
-    <span data-count="37">C</span>ube_map.filter cube ~f:(equal_optio<span data-count="37">n</span> Color.equal c)
+  <span data-count="8">l</span>et cube_limited_to_color c = 
+    <span data-count="43">C</span>ube_map.filter cube ~f:(equal_optio<span data-count="43">n</span> Color.equal c)
   in
   colors
-  |&gt; List.for_all ~f:(fun c -&gt; <span data-count="37">S</span>ome c |&gt; cube_limited_to_colo<span data-count="37">r</span> |&gt; Cube_map.lengt<span data-count="37">h</span> |&gt; equal_int 9)
+  |&gt; List.for_all ~f:(fun c -&gt; <span data-count="43">S</span>ome c |&gt; cube_limited_to_colo<span data-count="43">r</span> |&gt; Cube_map.lengt<span data-count="43">h</span> |&gt; equal_int 9)
 
 let from_list (ls: (Facelet.t * color option) list) : t option =
   <span data-count="3">l</span>et c_op = Option.try_with (fun () -&gt; <span data-count="3">C</span>ube_map.of_alist_exn ls) in (* ignore error messages and just keep as option *)
@@ -265,7 +264,7 @@ let from_list (ls: (Facelet.t * color option) list) : t option =
   | <span data-count="0">_</span> -&gt; None
 
 let equal_cube (c1: t) (c2: t) : bool =
-  <span data-count="10031">C</span>ube_map.equal (equal_optio<span data-count="10031">n</span> Color.equal) c1 c2
+  <span data-count="10032">C</span>ube_map.equal (equal_optio<span data-count="10032">n</span> Color.equal) c1 c2
 
 (* The middle colors can never change, so rotations/symmetry are ignored.
   Therefore, a cube is solved iff it is exactly equal to create_solved () *)
@@ -273,8 +272,8 @@ let is_solved (cube: t) : bool =
   <span data-count="16">e</span>qual_cube cube @@ create_solve<span data-count="16">d</span> ()
 
 let get (cube: t) (facelet: facelet) : color option =
-  <span data-count="393025479">m</span>atch Cube_map.find cube facelet with
-  | <span data-count="393025479">S</span>ome c_op -&gt; c_op (* find gets Some (Some c), so get Some c *)
+  <span data-count="453526739">m</span>atch Cube_map.find cube facelet with
+  | <span data-count="453526739">S</span>ome c_op -&gt; c_op (* find gets Some (Some c), so get Some c *)
   | <span data-count="0">N</span>one -&gt; None
 
 let set (cube: t) (facelet:facelet) (color: color option) : (t, string) result =
@@ -283,28 +282,28 @@ let set (cube: t) (facelet:facelet) (color: color option) : (t, string) result =
   else <span data-count="1">O</span>k (Cube_map.se<span data-count="1">t</span> cube ~key:facelet ~data:color)
 
 let move (cube: t) (turn: turn) : t =
-  <span data-count="3670789">l</span>et (turn, multiple) = match Turn_map.find turn_equivalence_map turn with
-    | <span data-count="3670789">S</span>ome x -&gt; x
-    | <span data-count="0">N</span>one -&gt; failwith "Turn not found!"
+  <span data-count="4202517">l</span>et (turn, multiple) = match Turn_map.find turn_equivalence_map turn with
+    | <span data-count="4202417">S</span>ome x -&gt; x
+    | <span data-count="105">N</span>one -&gt; failwith "Turn not found!"
   in
   let make_move (t: turn) (c: t) =
-    <span data-count="6530384">t</span>
-    |&gt; Turn_map.fin<span data-count="6530384">d</span> turn_results (* Find the resulting list of facelets from the turn *)
-    |&gt; Option.value_ex<span data-count="6530384">n</span> (* Illegal turns are caught above, so this is safe *)
-    |&gt; List.ma<span data-count="6530384">p</span> ~f:(fun facelet -&gt; <span data-count="352640736">g</span>et c facelet) (* Get the colors that will fill in *)
-    |&gt; List.zip_ex<span data-count="6530384">n</span> all_facelets (* Zip colors with the facelet that they will replace *)
+    <span data-count="7525810">t</span>
+    |&gt; Turn_map.fin<span data-count="7525810">d</span> turn_results (* Find the resulting list of facelets from the turn *)
+    |&gt; Option.value_ex<span data-count="7525810">n</span> (* Illegal turns are caught above, so this is safe *)
+    |&gt; List.ma<span data-count="7525810">p</span> ~f:(fun facelet -&gt; <span data-count="406393475">g</span>et c facelet) (* Get the colors that will fill in *)
+    |&gt; List.zip_ex<span data-count="7525810">n</span> all_facelets (* Zip colors with the facelet that they will replace *)
     |&gt; Cube_map.of_alist_exn (* Populate the cube with these new facelet,color values *)
   in
-  Fn.apply_n_times ~n:multiple (make_mov<span data-count="3670789">e</span> turn) cube (* apply the turn multiple times*)
+  Fn.apply_n_times ~n:multiple (make_mov<span data-count="4202412">e</span> turn) cube (* apply the turn multiple times*)
 
 let move_seq (cube: t) (ls: turn list) : t =
-  <span data-count="70033">L</span>ist.fold ls ~init:cube ~f:move
+  <span data-count="70138">L</span>ist.fold ls ~init:cube ~f:move
 
 let scramble () : t =
-  <span data-count="1">l</span>et n = 18 in (* Only consider the first 18 turns because I don't want the rotation used in the scramble *)
+  <span data-count="35290">l</span>et n = 18 in (* Only consider the first 18 turns because I don't want the rotation used in the scramble *)
   20 (* Need at least 19 moves to scramble based on some source I found. Use 20. *)
-  |&gt; List.ini<span data-count="1">t</span> ~f:(fun _ -&gt; <span data-count="20">L</span>ist.nth_exn all_turns (Random.in<span data-count="20">t</span> n)) (* Create list of random turns *)
-  |&gt; List.fold ~init:(create_solve<span data-count="1">d</span> ()) ~f:mov<span data-count="20">e</span>
+  |&gt; List.ini<span data-count="2375">t</span> ~f:(fun _ -&gt; <span data-count="45505">L</span>ist.nth_exn all_turns (Random.in<span data-count="45405">t</span> n)) (* Create list of random turns *)
+  |&gt; List.fold ~init:(create_solve<span data-count="2275">d</span> ()) ~f:mov<span data-count="3304398">e</span>
 </code></pre>
       </div>
     </div>

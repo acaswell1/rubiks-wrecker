@@ -216,15 +216,17 @@ let are_top_edges_solved (cube: Cube.t) : bool =
   each of the algorithms and seeing if they work. There are four algorithms to permute the edges
   and three algorithms to permute the corners. That's not so bad.
   *)
-let rec solve_PLL_edges (cube: Cube.t) : Cube.t Turn_stack.t =
-  let soln = pll_edge_algorithms
-    |> List.map ~f:(fun ls -> monadic_move_seq ls cube)
-    |> List.filter ~f:(fun m -> run @@ let%bind cube = m in return (are_top_edges_solved cube))
-  in match soln with
-  | [] -> monadic_move U cube >>= solve_PLL_edges (* None of these algorithms solved the edges. Rotate once and try again *)
-  | m :: [] -> m (* Found a solution. *)
-  | _ -> failwith "Unexpected orientation after OLL; unsolvable edges by PLL"
-
+let solve_PLL_edges (cube: Cube.t) : Cube.t Turn_stack.t =
+  let rec f (count: int) (cube: Cube.t) : Cube.t Turn_stack.t =
+    if count = 4 then failwith "Could not solve PLL edges; cube is not well formed" else
+    let soln = pll_edge_algorithms
+      |> List.map ~f:(fun ls -> monadic_move_seq ls cube)
+      |> List.find ~f:(fun m -> run @@ let%bind cube = m in return (are_top_edges_solved cube))
+    in match soln with
+    | None -> monadic_move U cube >>= f (count + 1) (* None of these algorithms solved the edges. Rotate once and try again *)
+    | Some m -> m (* Found a solution. *)
+  in
+  f 0 cube
 
 (* Given a well-formed cube, return true iff the top layer is solved, disregarding orientation.
   That is, the colors on the outside facelets of the top layer are as expected, but they
@@ -242,14 +244,17 @@ let is_top_layer_solved (cube: Cube.t) : bool =
 (* The final step is to solve the corners once the top face is all white and the edges
   are oriented correctly. Take the same approach as solving PLL edges.
   *)
-let rec solve_PLL_corners (cube: Cube.t) : Cube.t Turn_stack.t =
-  let soln = pll_corner_algorithms
-    |> List.map ~f:(fun ls -> monadic_move_seq ls cube)
-    |> List.filter ~f:(fun m -> run @@ let%bind cube = m in return (is_top_layer_solved cube)) (* Limit to algorithms that solved the top layer *)
-  in match soln with
-  | [] -> monadic_move U cube >>= solve_PLL_corners (* None of these algorithms solved the edges. Rotate once and try again *)
-  | m :: [] -> m (* Found a solution. *)
-  | _ -> failwith "Unexpected orientation after OLL; unsolvable corners by PLL"
+let solve_PLL_corners (cube: Cube.t) : Cube.t Turn_stack.t =
+  let rec f (count: int) (cube: Cube.t) : Cube.t Turn_stack.t =
+    if count = 4 then failwith "Could not solve PLL corners; cube is not well formed" else
+    let soln = pll_corner_algorithms
+      |> List.map ~f:(fun ls -> monadic_move_seq ls cube)
+      |> List.find ~f:(fun m -> run @@ let%bind cube = m in return (is_top_layer_solved cube)) (* Find first algorithm that solved the top layer *)
+    in match soln with
+    | None -> monadic_move U cube >>= f (count + 1) (* None of these algorithms solved the edges. Rotate once and try again *)
+    | Some m -> m (* Found a solution. *)
+  in
+  f 0 cube
 
 (* Given a completely solved cube except for the rotation of the top face,
   finish solving the cube. *)

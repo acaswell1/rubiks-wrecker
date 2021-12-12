@@ -103,31 +103,31 @@ module T = struct
   type 'a t = turnstack -&gt; 'a * turnstack
 
   let bind (x : 'a t) ~(f : 'a -&gt; 'b t) : 'b t =
-    <span data-count="8565271">f</span>un (s : turnstack) -&gt;
-    <span data-count="8622925">l</span>et x', s' = x s in
-    <span data-count="8622925">(</span><span data-count="8622925">f</span> x') s'
+    <span data-count="10145773">f</span>un (s : turnstack) -&gt;
+    <span data-count="9828146">l</span>et x', s' = x s in
+    <span data-count="9828112">(</span><span data-count="9828097">f</span> x') s'
 
-  let return (x : 'a) : 'a t = <span data-count="5323265">f</span>un (s : turnstack) -&gt; <span data-count="5333287">(</span>x, s)
+  let return (x : 'a) : 'a t = <span data-count="6062293">f</span>un (s : turnstack) -&gt; <span data-count="6046230">(</span>x, s)
 
   let map = `Define_using_bind
 
   (* Run puts us in c's monad-land with an empty stack
       Unlike with state monad above just throw away final stack here
   *)
-  let run (c : 'a t) : 'a = <span data-count="99189">m</span>atch c [] with <span data-count="99189">a</span>, _ -&gt; a
+  let run (c : 'a t) : 'a = <span data-count="123450">m</span>atch c [] with <span data-count="123435">a</span>, _ -&gt; a
 
   (* pop should "push" the turn onto the turnstack and return () as the value *)
-  let push (t : Turn.t) : unit t = <span data-count="3388826">f</span>un (s : turnstack) -&gt; <span data-count="3388826">(</span>(), t :: s)
+  let push (t : Turn.t) : unit t = <span data-count="3903023">f</span>un (s : turnstack) -&gt; <span data-count="3903023">(</span>(), t :: s)
 
   (* The turns are added to the stack in the reverse order that they are performed, so 
     use get_rev_stack to get the turns in the order they were performed. *)
   let get_rev_stack : turnstack t =
-    fun (s : turnstack) -&gt; <span data-count="1">(</span>List.re<span data-count="1">v</span> s, s)
+    fun (s : turnstack) -&gt; <span data-count="2294">(</span>List.re<span data-count="2294">v</span> s, s)
 
 end
 
 include T
-include Monad.Make (T<span data-count="10">)</span>
+include Monad.Make (T<span data-count="30">)</span>
 </code></pre>
       </div>
     </div>

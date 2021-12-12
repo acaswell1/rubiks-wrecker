@@ -622,9 +622,9 @@ let test_are_top_edges_solved _ =
   <span data-count="1">a</span>ssert_equal true (create_solve<span data-count="1">d</span> () |&gt; Fn.fli<span data-count="1">p</span> move U |&gt; are_top_edges_solve<span data-count="1">d</span>);
   <span data-count="1">a</span>ssert_equal true (create_solve<span data-count="1">d</span> () |&gt; Fn.fli<span data-count="1">p</span> move U2 |&gt; are_top_edges_solve<span data-count="1">d</span>);
   <span data-count="1">a</span>ssert_equal true (create_solve<span data-count="1">d</span> () |&gt; Fn.fli<span data-count="1">p</span> move U' |&gt; are_top_edges_solve<span data-count="1">d</span>);
-  <span data-count="1">l</span>et s = List.hd_exn Consts.pll_edge_algorithms in
+  <span data-count="1">l</span>et s = List.nth_exn Consts.pll_edge_algorithms 1 in
   <span data-count="1">a</span>ssert_equal false (create_solve<span data-count="1">d</span> () |&gt; Fn.fli<span data-count="1">p</span> move_seq s |&gt; are_top_edges_solve<span data-count="1">d</span>);
-  <span data-count="1">l</span>et s = List.hd_exn Consts.pll_corner_algorithms in
+  <span data-count="1">l</span>et s = List.nth_exn Consts.pll_corner_algorithms 1 in
   <span data-count="1">a</span>ssert_equal true (create_solve<span data-count="1">d</span> () |&gt; Fn.fli<span data-count="1">p</span> move_seq s |&gt; are_top_edges_solve<span data-count="1">d</span>);
 ;;
 
@@ -634,9 +634,9 @@ let test_is_top_layer_solved _ =
   <span data-count="1">a</span>ssert_equal true (create_solve<span data-count="1">d</span> () |&gt; Fn.fli<span data-count="1">p</span> move U2 |&gt; is_top_layer_solve<span data-count="1">d</span>);
   <span data-count="1">a</span>ssert_equal true (create_solve<span data-count="1">d</span> () |&gt; Fn.fli<span data-count="1">p</span> move U' |&gt; is_top_layer_solve<span data-count="1">d</span>);
   <span data-count="1">a</span>ssert_equal false (create_solve<span data-count="1">d</span> () |&gt; Fn.fli<span data-count="1">p</span> move F |&gt; is_top_layer_solve<span data-count="1">d</span>);
-  <span data-count="1">l</span>et s = List.hd_exn Consts.pll_edge_algorithms in
+  <span data-count="1">l</span>et s = List.nth_exn Consts.pll_edge_algorithms 1 in
   <span data-count="1">a</span>ssert_equal false (create_solve<span data-count="1">d</span> () |&gt; Fn.fli<span data-count="1">p</span> move_seq s |&gt; is_top_layer_solve<span data-count="1">d</span>);
-  <span data-count="1">l</span>et s = List.hd_exn Consts.pll_corner_algorithms in
+  <span data-count="1">l</span>et s = List.nth_exn Consts.pll_corner_algorithms 1 in
   <span data-count="1">a</span>ssert_equal false (create_solve<span data-count="1">d</span> () |&gt; Fn.fli<span data-count="1">p</span> move_seq s |&gt; is_top_layer_solve<span data-count="1">d</span>);
 ;;
 

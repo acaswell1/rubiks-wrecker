@@ -209,11 +209,11 @@ let oll_perms =
   moves I allow.*)
 let pll_edge_algorithms =
   [
+    []; (* Also consider no solution necessary *)
     [R; U'; R; U; R; U; R; U'; R'; U'; R2];
     [R2; U; R; U; R'; U'; R'; U'; R'; U; R'];
-    (* [R2; L2; D; R2; L2; U2; R2; L2; D; R2; L2]; *) (* Not actually necessary *)
-    [R2; L2; D; R2; L2; U; R; L'; B2; R2; L2; F2; R; L'; U2];
-    [] (* Also consider no solution necessary *)
+    (* [R2; L2; D; R2; L2; U2; R2; L2; D; R2; L2]; *) (* Keeps solved state, so is "hidden" by no solution *)
+    [R2; L2; D; R2; L2; U; R; L'; B2; R2; L2; F2; R; L'; U2]
   ]
 
 (* This is the list of algorithms that solve the corners after the oll stage.
@@ -221,8 +221,10 @@ let pll_edge_algorithms =
   moves I allow.*)
 let pll_corner_algorithms =
   [
+    []; (* Also consider no solution necessary *)
     [R'; F; R'; B2; R; F'; R'; B2; R2];
     [R2; B2; R; F; R'; B2; R; F'; R];
     [R; B'; R'; F; R; B; R'; F'; R; B; R'; F; R; B'; R'; F'];
-    [] (* Also consider no solution necessary *)
+    [R'; F; R'; B2; R; F'; R'; B2; R2; U'; R'; F; R'; B2; R; F'; R'; B2; R2];
+    [R2; B2; R; F; R'; B2; R; F'; R; U; R2; B2; R; F; R'; B2; R; F'; R]
   ]

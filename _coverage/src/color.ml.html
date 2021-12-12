@@ -14,15 +14,10 @@
           <span class="dirname">src/</span>color.ml
         </a>
       </h1>
-      <h2>8.33%</h2>
+      <h2>29.17%</h2>
     </div>
     <div id="navbar">
       <span class="some-visited" style="top:4.55%"></span>
-      <span class="unvisited" style="top:27.27%"></span>
-      <span class="unvisited" style="top:31.82%"></span>
-      <span class="unvisited" style="top:36.36%"></span>
-      <span class="unvisited" style="top:40.91%"></span>
-      <span class="unvisited" style="top:45.45%"></span>
       <span class="unvisited" style="top:50.00%"></span>
       <span class="unvisited" style="bottom:45.45%"></span>
       <span class="unvisited" style="bottom:31.82%"></span>
@@ -42,11 +37,11 @@
 <a id="L3"></a><span > </span>
 <a id="L4"></a><span > </span>
 <a id="L5"></a><span > </span>
-<a id="L6"></a><span class="unvisited"> </span>
-<a id="L7"></a><span class="unvisited"> </span>
-<a id="L8"></a><span class="unvisited"> </span>
-<a id="L9"></a><span class="unvisited"> </span>
-<a id="L10"></a><span class="unvisited"> </span>
+<a id="L6"></a><span class="visited"> </span>
+<a id="L7"></a><span class="visited"> </span>
+<a id="L8"></a><span class="visited"> </span>
+<a id="L9"></a><span class="visited"> </span>
+<a id="L10"></a><span class="visited"> </span>
 <a id="L11"></a><span class="unvisited"> </span>
 <a id="L12"></a><span class="unvisited"> </span>
 <a id="L13"></a><span > </span>
@@ -91,11 +86,11 @@
 let colors = [Bl; Or; Gr; Re; Wh; Ye] (* Colors corresponding to each face of cube RBLFUD *)
 
 let to_string (color: t) : string =
-  <span data-count="0">m</span>atch color with
-  | <span data-count="0">B</span>l -&gt; "blue"
-  | <span data-count="0">O</span>r -&gt; "orange"
-  | <span data-count="0">G</span>r -&gt; "green"
-  | <span data-count="0">R</span>e -&gt; "red"
+  <span data-count="32">m</span>atch color with
+  | <span data-count="8">B</span>l -&gt; "blue"
+  | <span data-count="8">O</span>r -&gt; "orange"
+  | <span data-count="8">G</span>r -&gt; "green"
+  | <span data-count="8">R</span>e -&gt; "red"
   | <span data-count="0">W</span>h -&gt; "white"
   | <span data-count="0">Y</span>e -&gt; "yellow"
 
@@ -107,7 +102,7 @@ let from_string (s: string) : t option =
   | <span data-count="0">"</span>red" -&gt; Some Re
   | <span data-count="0">"</span>white" -&gt; Some Wh
   | <span data-count="0">"</span>yellow" -&gt; Some Ye
-  | <span data-count="0">_</span> -&gt; Non<span data-count="20">e</span>
+  | <span data-count="0">_</span> -&gt; Non<span data-count="40">e</span>
 </code></pre>
       </div>
     </div>
