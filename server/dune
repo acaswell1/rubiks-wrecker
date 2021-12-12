@@ -1,6 +1,9 @@
 (executable
  (name server)
- (libraries dream))
+ (libraries dream
+    core
+    cube)
+ )
 
 (rule
  (targets template.ml)

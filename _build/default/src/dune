@@ -15,11 +15,30 @@
   (preprocess (pps ppx_jane bisect_ppx)))
 
 (library
+  (name color)
+  (modules color)
+  (libraries 
+    core
+    base)
+  (preprocess (pps ppx_jane bisect_ppx)))
+
+(library
+  (name cubie)
+  (modules cubie)
+  (libraries 
+    core
+    base
+    color)
+  (preprocess (pps ppx_jane bisect_ppx)))
+
+(library
   (name cube)
   (modules cube)
   (libraries 
     core
     base
     turn
-    facelet)
+    facelet
+    color
+    cubie)
   (preprocess (pps ppx_jane bisect_ppx)))
