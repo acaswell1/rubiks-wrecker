@@ -116,13 +116,14 @@ let render param =
             color_array[arr_position] = i.style.backgroundColor;
             arr_position++;
           }
+          console.log(color_array);
           socket.send(color_array);
         }
 
         var socket = new WebSocket("ws://" + window.location.host + "/websocket"); 
 
         socket.onmessage = function (e) {
-          alert(e.data);
+          document.getElementById('solution').innerText = e.data;
         };
 
         function randomRedirect() {

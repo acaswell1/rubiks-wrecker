@@ -1,6 +1,6 @@
 (executable
  (name server)
- (libraries dream core cube)
+ (libraries dream core cube solver turn)
  (preprocess (pps lwt_ppx)))
 
 (rule

@@ -6,13 +6,6 @@ open Color;;
 open Cube;;
 
 type color = Color.t
-<<<<<<< HEAD:_build/default/test/cube_tests.ml
-
-let c = create_solved ();;
-
-let test_nothing _ = assert_equal 0 0;;
-=======
->>>>>>> f86dca735dce7b022a6705eab7357622c16c7b7c:cube_tests/cube_tests.ml
 
 let c = create_solved ();;
 

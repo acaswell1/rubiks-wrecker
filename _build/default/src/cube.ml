@@ -1,15 +1,8 @@
-<<<<<<< HEAD
-open Core;;
-open Turn;;
-open Facelet;;
-open Color;;
-=======
 open Core
 open Turn
 open Facelet
 open Color
 open Consts
->>>>>>> f86dca735dce7b022a6705eab7357622c16c7b7c
 
 type turn = Turn.t
 type facelet = Facelet.t
