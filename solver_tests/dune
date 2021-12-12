@@ -3,5 +3,6 @@
   (libraries
     core
     ounit2
-    solver)
+    solver
+    consts)
     (preprocess (pps ppx_jane bisect_ppx)))
