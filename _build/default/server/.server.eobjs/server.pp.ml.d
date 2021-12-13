@@ -1,1 +1,1 @@
-server/server.pp.ml: Color Core Cube Dream Facelet List Lwt Solver String Template Turn
+server/server.pp.ml: Char Color Core Cube Dream Facelet Fn List Lwt Solver String Template Turn

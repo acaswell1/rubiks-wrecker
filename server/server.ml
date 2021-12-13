@@ -6,25 +6,24 @@ open Solver;;
 let color_converter (face : Facelet.t) (c : Cube.t): string = 
   match Cube.get c face with
   | Some x -> let col = Color.to_string x in 
-    if compare (String.compare col "blue") 0 = 0 then "blue  " 
-    else if compare (String.compare col "red") 0 = 0 then "red   " 
-    else if compare (String.compare col "yellow") 0 = 0 then "yellow"
-    else if compare (String.compare col "orange") 0 = 0 then "orange"
-    else if compare (String.compare col "green") 0 = 0 then "green "
-    else if compare (String.compare col "white") 0 = 0 then "white " else 
+    if String.equal col "blue" then "blue  " 
+    else if String.equal col "red" then "red   " 
+    else if String.equal col "yellow" then "yellow"
+    else if String.equal col "orange" then "orange"
+    else if String.equal col "green" then "green "
+    else if String.equal col "white" then "white " else 
     "Error "
   | None -> "Error ";;
 
-let face_list =
-[Facelet.U1; Facelet.U2; Facelet.U3; Facelet.U4; Facelet.U5; Facelet.U6; Facelet.U7; Facelet.U8; Facelet.U9;
-Facelet.L1; Facelet.L2; Facelet.L3; Facelet.L4; Facelet.L5; Facelet.L6; Facelet.L7; Facelet.L8; Facelet.L9;
-Facelet.F1; Facelet.F2; Facelet.F3; Facelet.F4; Facelet.F5; Facelet.F6; Facelet.F7; Facelet.F8; Facelet.F9;
-Facelet.R1; Facelet.R2; Facelet.R3; Facelet.R4; Facelet.R5; Facelet.R6; Facelet.R7; Facelet.R8; Facelet.R9;
-Facelet.B1; Facelet.B2; Facelet.B3; Facelet.B4; Facelet.B5; Facelet.B6; Facelet.B7; Facelet.B8; Facelet.B9;
-Facelet.D1; Facelet.D2; Facelet.D3; Facelet.D4; Facelet.D5; Facelet.D6; Facelet.D7; Facelet.D8; Facelet.D9;]
+let face_list = Facelet.([U1; U2; U3; U4; U5; U6; U7; U8; U9;
+L1; L2; L3; L4; L5; L6; L7; L8; L9;
+F1; F2; F3; F4; F5; F6; F7; F8; F9;
+R1; R2; R3; R4; R5; R6; R7; R8; R9;
+B1; B2; B3; B4; B5; B6; B7; B8; B9;
+D1; D2; D3; D4; D5; D6; D7; D8; D9])
 
 let rec color_list (face_list: Facelet.t list): string = 
-let c = scramble () in 
+let c = create_solved () in 
   match face_list with
     | x :: xs -> color_converter x c ^ color_list xs
     | [] -> ""
@@ -39,9 +38,15 @@ let rec set_facelets_to_color (list_facelets) (list_colors: color option list) =
   
 let solution_cube = set_facelets_to_color face_list 
 
+let format_string (list_moves: Turn.t list) = 
+  List.chunks_of ~length:6 list_moves 
+  |> List.map ~f:(List.to_string ~f:Turn.to_string)
+  |> List.to_string ~f:Fn.id
+  |> String.filter ~f:(fun c -> not @@ Char.equal c '"')
+
 let get_solution (solution_cube) = 
   match get_solution solution_cube with
-  | Ok x -> List.to_string ~f:(fun y -> Turn.to_string y) x 
+  | Ok x -> x |> format_string
   | Error y -> y
 
 let ensure_cube_correct (cube_from_list) =
