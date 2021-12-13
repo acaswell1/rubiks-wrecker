@@ -262,42 +262,25 @@ let rec solve_top_orientation (cube: Cube.t) : Cube.t Turn_stack.t =
   if is_color cube Re F2 then return cube (* We're done! Hooray! *)
   else monadic_move U cube >>= solve_top_orientation (* Red doesn't line up, turn top face until it does. *)
 
-(* May be best to convert to move equivalences, then block into all of same type in a row, then convert back. *)
-let parse (t1, t2 : turn * turn) : turn list =
-  (* Yes, long and messy as usual in this program *)
-  match t1, t2 with
-  | R, R' | B, B' | L, L' | F, F' | U, U' | D, D' | Y, Y'
-  | R', R | B', B | L', L | F', F | U', U | D', D | Y', Y
-  | R2, R2 | B2, B2 | L2, L2 | F2, F2 | U2, U2 | D2, D2 | Y2, Y2 -> []
-  | R, R2 | R2, R -> [R']
-  | B, B2 | B2, B -> [B']
-  | L, L2 | L2, L -> [L']
-  | F, F2 | F2, F -> [F']
-  | U, U2 | U2, U -> [U']
-  | D, D2 | D2, D -> [D']
-  | Y, Y2 | Y2, Y -> [Y']
-  | R', R2 | R2, R' -> [R] (* Cannot convert to string and do this more algorithmically because of issues with ' character *)
-  | B', B2 | B2, B' -> [B]
-  | L', L2 | L2, L' -> [L]
-  | F', F2 | F2, F' -> [F]
-  | U', U2 | U2, U' -> [U]
-  | D', D2 | D2, D' -> [D]
-  | Y', Y2 | Y2, Y' -> [Y]
-  | R, R | R', R' -> [R2]
-  | B, B | B', B' -> [B2]
-  | L, L | L', L' -> [L2]
-  | F, F | F', F' -> [F2]
-  | U, U | U', U' -> [U2]
-  | D, D | D', D' -> [D2]
-  | Y, Y | Y', Y' -> [Y2]
-  | _ -> [t1; t2] (* catch the remaining cases by just putting back on stack*)
+
+(* Parses two turns into the equivalent *)
+let parse (t1: turn) (t2 : turn) : turn list =
+  let find_base_turn t = t |> Turn.to_int |> Int.round_down ~to_multiple_of:3 in
+  let find_turn_multiple t = Turn.to_int t % 3 + 1 in (* Mod three because all turns are either 1, 2, or 3 clockwise turns *)
+  if find_base_turn t1 <> find_base_turn t2 then [t1; t2] (* Turns couldn't be simplified, so just put back on stack *)
+  else begin (* Turns are inherently the same; they're just a different multiple *)
+    let total_multiple = (find_turn_multiple t1 + find_turn_multiple t2) % 4 in (* Sum the multiples of this turn. mod 4 because 0 turns is possible *)
+    if total_multiple = 0 then [] (* result is no turns at all! *)
+    else total_multiple - 1 |> Int.(+) @@ find_base_turn t1 |> Turn.of_int_exn |> List.return (* Need to return the equivalent turn *)
+  end
+
 
 (* Simplify the turn list by replacing series of moves with identical moves.
   e.g. R R2 <=> R' *)
 let rec simplify (ls : turn list) : turn list =
   let res = List.fold ls ~init:[] ~f:(fun stack next ->
     match stack with
-    | top :: tail -> parse (next, top) @ tail
+    | top :: tail -> parse next top @ tail
     | [] -> [next])
   |> List.rev (* Must reverse because used a stack, which reversed the order *)
   in
