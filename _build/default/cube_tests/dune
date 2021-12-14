@@ -1,7 +1,0 @@
-(test
-  (name cube_tests)
-  (libraries
-    core
-    ounit2
-    cube)
-    (preprocess (pps ppx_jane bisect_ppx)))
