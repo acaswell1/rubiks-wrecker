@@ -1,0 +1,8 @@
+(test
+  (name solver_tests)
+  (libraries
+    core
+    ounit2
+    solver
+    consts)
+    (preprocess (pps ppx_jane bisect_ppx)))
