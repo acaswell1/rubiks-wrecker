@@ -1,7 +1,0 @@
-lib: [
-  "_build/install/default/lib/hello_world/META"
-  "_build/install/default/lib/hello_world/dune-package"
-]
-doc: [
-  "_build/install/default/doc/hello_world/README.md"
-]
