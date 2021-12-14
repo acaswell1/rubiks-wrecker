@@ -15,6 +15,8 @@ let render param =
       }
       .background{
         background-color: lightslategray;
+        justify-content: center;
+        align-content: center;
       }
       .solve-selector{
         display: grid;
@@ -92,9 +94,18 @@ let render param =
       .grid-item:hover{
         background-color: azure;
       }
-      #solution{
+      p {
         text-align: center;
-        text-justify: auto;
+        text-justify: center;
+        text-emphasis: bold;
+        text-transform: uppercase;
+        background-color: white;
+        max-width: 40ch;
+        margin: 20px auto;
+        font-size: 20pt;
+        font-family: Arial, Helvetica, sans-serif;
+        border-radius: 10px;
+        
       }
 
       </style>
@@ -104,7 +115,7 @@ let render param =
     <h1 class="top-of-page">The Rubik's Wrecker</h1>
     <div class= "solve-selector">
       <button onClick="window.location.reload()" class="choice">Reset</button>
-      <button onClick="revealRandom();" class="choice">Solved Cube</button>
+      <button onClick="revealSolved();" class="choice">Solved Cube</button>
       <button id="Solve" onClick="displaySolution();" class="choice">Solve</button>
       <script>
         function displaySolution() {
@@ -122,13 +133,10 @@ let render param =
         var socket = new WebSocket("ws://" + window.location.host + "/websocket"); 
 
         socket.onmessage = function (e) {
-          document.getElementById('solution').innerText = "Moves: " + e.data;
+          document.getElementById('solution').textContent = "Moves: " + e.data;
         };
 
-        function randomRedirect() {
-          window.location.href='/random';
-        }
-        function revealRandom() {
+        function revealSolved() {
           var blue_names = document.getElementsByName("blue"); 
           var green_names = document.getElementsByName("green"); 
           var yellow_names = document.getElementsByName("yellow"); 
@@ -144,7 +152,7 @@ let render param =
         }
       </script>
     </div>
-    <p id="solution"></p>
+    <p class="solution-text" id="solution" style="text-emphasis: bold;"></p>
     <div id="color_select" class ="color-selector">
       <button onclick="myFunction('red')" class="selector red-selector"> </button>
       <button onclick="myFunction('blue')" class="selector blue-selector"></button>
@@ -210,7 +218,9 @@ let render param =
         <div name=<%s String.sub param 210 6%> id="R9" onclick="colorChange(this.id)" class="grid-item"></div>
       </div>
       <div class="grid-container">
-        <div name=<%s String.sub param 216 6%> id="B1" onclick="colorChange('B1')" class="grid-item"></div>
+        <div name=<%s String.sub param 216 6%> id="B1" onclick="colorChange('B1')" class="grid-item">
+          <div class="popup-selector" id="B1p"><span class="popup"></span></div>
+        </div>
         <div name=<%s String.sub param 222 6%> id="B2" onclick="colorChange('B2')" class="grid-item"></div>
         <div name=<%s String.sub param 228 6%> id="B3" onclick="colorChange('B3')" class="grid-item"></div>
         <div name=<%s String.sub param 234 6%> id="B4" onclick="colorChange('B4')"class="grid-item"></div>
@@ -239,7 +249,36 @@ let render param =
       </div>
       <script>
         function colorChange(id) {
-          document.getElementById(id).style.backgroundColor = document.getElementById("color_select").style.backgroundColor;
+          var faceletCol = document.getElementById(id).style.backgroundColor;
+          var setColor = document.getElementById("color_select").style.backgroundColor;
+          switch (setColor) {
+            case "": 
+              switch (faceletCol) {
+                case "":
+                  document.getElementById(id).style.backgroundColor = 'red';
+                  break;
+                case 'red':
+                  console.log("here");
+                  document.getElementById(id).style.backgroundColor = 'orange';
+                  break;
+                case "orange":
+                  document.getElementById(id).style.backgroundColor = 'blue';
+                  break;
+                case "blue":
+                  document.getElementById(id).style.backgroundColor = 'green';
+                  break;
+                case "green":
+                  document.getElementById(id).style.backgroundColor = 'yellow';
+                  break;
+                case "yellow":
+                  document.getElementById(id).style.backgroundColor = 'white';
+                  break;
+                case "white": 
+                  document.getElementById(id).style.backgroundColor = "red";
+                  break;
+              } break; 
+              default: document.getElementById(id).style.backgroundColor = setColor;
+          }
         }
       </script>
     </div>
