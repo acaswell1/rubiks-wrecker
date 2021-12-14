@@ -1,0 +1,1 @@
+web: ./_build/default/server/server.exe
