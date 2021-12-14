@@ -1,5 +1,5 @@
-Brandon Stride and Alec Caswell
-bstride1, acaswel1
+Names: Brandon Stride and Alec Caswell
+JHED: bstride1, acaswel1
 
 SUMMARY:
 This deployment uses a front end user interface deployed at (http://rubiks-wrecker.herokuapp.com/) 
