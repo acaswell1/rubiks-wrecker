@@ -133,6 +133,7 @@ let render param =
         var socket = new WebSocket("ws://" + window.location.host + "/websocket"); 
 
         socket.onmessage = function (e) {
+          console.log("Here")
           document.getElementById('solution').textContent = "Moves: " + e.data;
         };
 

@@ -63,7 +63,7 @@ let solve (color_string) : string =
   
 
 let () =
-  Dream.run ~interface:"0.0.0.0" ~port:(int_of_string (Sys.getenv_exn "PORT"))
+  Dream.run
   @@ Dream.logger 
   @@ Dream.router [ 
   Dream.get "/" (fun _ -> color_list (face_list) |> Template.render |>

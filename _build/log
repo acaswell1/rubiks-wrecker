@@ -1,10 +1,10 @@
-# dune build
+# dune exec ./server/server.exe
 # OCAMLPARAM: unset
 # Workspace root: /home/acaswell/FPSE-Final
-$ /usr/bin/nproc > /tmp/dunec3d48b.output 2> /dev/null
+$ /usr/bin/nproc > /tmp/dune7b2cdc.output 2> /dev/null
 # Auto-detected concurrency: 12
 # disable binary cache
-$ /home/acaswell/.opam/4.11.1/bin/ocamlc.opt -config > /tmp/duneffe1a5.output
+$ /home/acaswell/.opam/4.11.1/bin/ocamlc.opt -config > /tmp/dune8c4b04.output
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
@@ -108,3 +108,4 @@ $ /home/acaswell/.opam/4.11.1/bin/ocamlc.opt -config > /tmp/duneffe1a5.output
 #      ; windows_unicode = false
 #      }
 #  }
+# Workspace root: /home/acaswell/FPSE-Final
