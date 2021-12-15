@@ -3,16 +3,16 @@ JHED: bstride1, acaswel1
 
 SUMMARY:
 This deployment uses a front end user interface deployed at (http://rubiks-wrecker.herokuapp.com/) 
-to send the current state of a rubiks cube to the solver. Note, to access functionality of all of the application
-the http version of the deployment to heroku must be used as we chose to focus on the functionality of the website 
-rather than security protocol. Additionally, there is no user information collected so the risk for users accessing the
-website is minimal. 
-The solver then uses a system of algorithms to compute a solution for the given rubiks cube.
+to send the current state of a Rubik's cube to the solver. The solver then uses a system of algorithms to compute
+a solution for the given Rubik's cube.
 This algorithm does not take an optimal approach but rather mimics the approach of an experienced human solver.
 This way, the user can use Rubik's Wrecker as an aid in learning to solve the Rubik's cube. This is contrary to
 many online solvers that employ Kociemba's algorithm, which seemingly works magic and is not a realistic way for
 a human to solve a Rubik's cube. On the brightside, our algorithm solves the cube in 0.07 seconds on average,
 whereas other, more optimal solvers take a few seconds.
+
+Note: you must use the http version to access the full functionality of the application; the https version does
+not have 'solve' functionality. There is no user information collected, so the risk for users accessing the website is minimal.
 
 BUILD AND RUN:
 This app can be built using a standard 'dune build'. Then, by running the command 'dune exec ./server/server.exe',
