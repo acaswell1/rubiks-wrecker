@@ -1,7 +1,7 @@
 (lang dune 2.9)
   (generate_opam_files true)
   (authors "Brandon Stride" "Alec Caswell")
-  (maintainers "bstride1@jh.edu" "acaswell@jhu.edu")
+  (maintainers "bstride1@jhu.edu" "acaswell@jhu.edu")
   (package
    (name rubiks-wrecker) 
    (synopsis "A solution to a given rubiks cube using Functional Programming")

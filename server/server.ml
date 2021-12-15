@@ -63,7 +63,7 @@ let solve (color_string) : string =
   
 
 let () =
-  Dream.run
+  Dream.run ~interface:"0.0.0.0" ~port:(int_of_string (Sys.getenv_exn "PORT"))
   @@ Dream.logger 
   @@ Dream.router [ 
   Dream.get "/" (fun _ -> color_list (face_list) |> Template.render |>
@@ -72,8 +72,7 @@ let () =
   Dream.get "/websocket"
   (fun _ -> Dream.websocket (fun websocket ->
     match%lwt Dream.receive websocket with
-    | Some "Test" -> let%lwt () = Dream.send websocket "Pass" in Dream.close_websocket websocket
     | Some x -> let%lwt () = Dream.send websocket (solve x) in Dream.close_websocket websocket
-    | _ -> Dream.close_websocket websocket));
+    | None -> Dream.close_websocket websocket));
   ]
   @@ Dream.not_found
