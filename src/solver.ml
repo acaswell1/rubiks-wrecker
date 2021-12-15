@@ -177,12 +177,20 @@ let has_all_white (cube: Cube.t) (flets: facelet list) : bool =
 
   See consts.ml for defintion of oll_perms used here.
 *)
-let rec solve_OLL (cube : Cube.t) : Cube.t Turn_stack.t =
-  let turn_seq = List.find oll_perms ~f:(fun (ls, _) -> has_all_white cube ls) in
-  match turn_seq with
-  | Some (_, seq) when List.is_empty seq -> return cube (* Cube matched the solved configuration, so return *)
-  | Some (_, seq) -> monadic_move_seq seq cube >>= solve_OLL (* Matched an unsolved configuration, so do sequence and repeat *)
-  | None -> monadic_move U cube >>= solve_OLL (* Didn't match any configuration, so rotate top face and try again *)
+let solve_OLL (cube : Cube.t) : Cube.t Turn_stack.t =
+  (* Create recursive function that can keep track of the number of turns on the top layer.
+    This way, if the cube is not well formed, it will be recognized by the count reaching 4,
+      i.e. every orientation of the top layer was tried, but nothing matched, so cube must
+    not be well-formed. *)
+  let rec f (count: int) (cube: Cube.t) : Cube.t Turn_stack.t =
+    if count = 4 then failwith "Could not solve OLL; cube is not well formed" else
+    let turn_seq = List.find oll_perms ~f:(fun (ls, _) -> has_all_white cube ls) in
+    match turn_seq with
+    | Some (_, seq) when List.is_empty seq -> return cube (* Cube matched the solved configuration, so return *)
+    | Some (_, seq) -> monadic_move_seq seq cube >>= f 0 (* Matched an unsolved configuration, so do sequence and repeat. Can reset count *)
+    | None -> monadic_move U cube >>= f (count + 1) (* Didn't match any configuration, so rotate top face and try again *)
+  in
+  f 0 cube
 
 (* Given a list of colors, find the index of the first Re.
   This is to be used when checking the color of the outside facelets of the top layer
