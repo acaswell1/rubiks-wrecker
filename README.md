@@ -13,6 +13,7 @@ whereas other, more optimal solvers take a few seconds.
 
 Note: you must use the http version to access the full functionality of the application; the https version does
 not have 'solve' functionality. There is no user information collected, so the risk for users accessing the website is minimal.
+If your site defaults to https, you may need to disable automatic https.
 
 BUILD AND RUN:
 This app can be built using a standard 'dune build'. Then, by running the command 'dune exec ./server/server.exe',

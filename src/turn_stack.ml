@@ -1,6 +1,5 @@
 open Core;;
 
-(* Taken from Assignment5 and adapted to work for turns *)
 module T = struct
   type turnstack = Turn.t list (* this is our "heap type" *)
 
@@ -20,7 +19,7 @@ module T = struct
   *)
   let run (c : 'a t) : 'a = match c [] with a, _ -> a
 
-  (* pop should "push" the turn onto the turnstack and return () as the value *)
+  (* Pushes the turn onto the turnstack and return () as the value *)
   let push (t : Turn.t) : unit t = fun (s : turnstack) -> ((), t :: s)
 
   (* The turns are added to the stack in the reverse order that they are performed, so 
