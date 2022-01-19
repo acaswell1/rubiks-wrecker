@@ -8,7 +8,7 @@ This deployment uses a front end user interface deployed at (http://rubiks-wreck
     mimics the approach of an experienced human solver. This way, the user can use Rubik's Wrecker as an aid
     in learning to solve the Rubik's cube. This is contrary to many online solvers that employ Kociemba's algorithm,
     which seemingly works magic and is not a realistic way for a human to solve a Rubik's cube."""
-maintainer: ["bstride1@jh.edu" "acaswell@jhu.edu"]
+maintainer: ["bstride1@jhu.edu" "acaswell@jhu.edu"]
 authors: ["Brandon Stride" "Alec Caswell"]
 depends: [
   "dune" {>= "2.9"}

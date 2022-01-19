@@ -1,0 +1,25 @@
+(rule
+    (target fpsefinal.zip)
+    (deps 
+        dune-project
+        rubiks-wrecker.opam
+        README.md
+        src/color.ml
+        src/consts.ml
+        src/cube.ml
+        src/cube.mli
+        src/dune
+        src/facelet.ml
+        src/solver.ml
+        src/turn_stack.ml
+        src/turn.ml
+        solver_tests/solver_tests.ml
+        solver_tests/dune
+        server/dune
+        server/server.ml
+        server/template.eml.html
+        cube_tests/cube_tests.ml
+        cube_tests/dune
+    )
+    (action 
+    (run zip -R fpsefinal.zip %{deps})))
