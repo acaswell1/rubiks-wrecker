@@ -2,7 +2,7 @@ Names: Brandon Stride and Alec Caswell
 JHED: bstride1, acaswel1
 
 SUMMARY:
-This deployment uses a front end user interface deployed at (http://rubiks-wrecker.herokuapp.com/) 
+This deployment uses a front end user interface deployed at (RETIRED: http://rubiks-wrecker.herokuapp.com/) 
 to send the current state of a Rubik's cube to the solver. The solver then uses a system of algorithms to compute
 a solution for the given Rubik's cube.
 This algorithm does not take an optimal approach but rather mimics the approach of an experienced human solver.
